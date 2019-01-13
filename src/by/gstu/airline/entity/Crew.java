@@ -1,5 +1,6 @@
 package by.gstu.airline.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crew {
@@ -8,11 +9,11 @@ public class Crew {
     private List<Employee> employeeList;
 
     public Crew() {
+        employeeList = new ArrayList<>();
     }
 
-    public Crew(String name, List<Employee> employeeList) {
+    public Crew(String name) {
         this.name = name;
-        this.employeeList = employeeList;
     }
 
     public int getId() {
@@ -37,5 +38,14 @@ public class Crew {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    @Override
+    public String toString() {
+        return "Crew{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employeeList=" + employeeList +
+                '}';
     }
 }

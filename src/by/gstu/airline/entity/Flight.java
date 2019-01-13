@@ -15,6 +15,17 @@ public class Flight {
     public Flight() {
     }
 
+    public Flight(int flightNumber, String startPoint, String destinationPoint, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String plane) {
+        this.flightNumber = flightNumber;
+        this.startPoint = startPoint;
+        this.destinationPoint = destinationPoint;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
+        this.plane = plane;
+    }
+
     public int getId() {
         return id;
     }
@@ -93,5 +104,21 @@ public class Flight {
 
     public void setCrew(Crew crew) {
         this.crew = crew;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", flightNumber=" + flightNumber +
+                ", startPoint='" + startPoint + '\'' +
+                ", destinationPoint='" + destinationPoint + '\'' +
+                ", departureDate='" + departureDate + '\'' +
+                ", departureTime='" + departureTime + '\'' +
+                ", arrivalDate='" + arrivalDate + '\'' +
+                ", arrivalTime='" + arrivalTime + '\'' +
+                ", plane='" + plane + '\'' +
+                ", crew=" + crew +
+                '}';
     }
 }

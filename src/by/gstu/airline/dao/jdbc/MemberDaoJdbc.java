@@ -1,6 +1,9 @@
 package by.gstu.airline.dao.jdbc;
 
 import by.gstu.airline.dao.MemberDao;
+import by.gstu.airline.dao.jdbc.connection.ProxyConnection;
+import by.gstu.airline.entity.Crew;
+import by.gstu.airline.entity.Employee;
 import by.gstu.airline.entity.Member;
 
 import java.sql.PreparedStatement;
@@ -32,11 +35,6 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
     }
 
     @Override
-    public List<Member> find() { // <-------- this!
-        return null;
-    }
-
-    @Override
     protected void prepareStatementForCreate(PreparedStatement statement, Member entity) throws SQLException {
         statement.setInt(1, entity.getCrewId());
         statement.setInt(2, entity.getEmployeeId());
@@ -57,7 +55,7 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
     @Override
     protected List<Member> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Member> list = new ArrayList<>();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             Member member = new Member();
             member.setId(resultSet.getInt(manager.getQuery("member.select.column.id")));
             member.setCrewId(resultSet.getInt(manager.getQuery("member.select.column.crewId")));
@@ -65,5 +63,24 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
             list.add(member);
         }
         return list;
+    }
+
+    @Override
+    public void deleteByCrewId(int crewId) {
+        String sql = manager.getQuery("member.delete.by.crew.id");
+        ProxyConnection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, crewId);
+//            if (statement.executeUpdate() >= 1) {
+//                System.out.println("deleted successfully");
+//            }
+        } catch (SQLException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, statement);
+        }
     }
 }

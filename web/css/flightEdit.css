@@ -1,0 +1,36 @@
+#content {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#flightNumber {
+    width: 30ch;
+}
+
+#startPoint, #destinationPoint {
+    width: 30ch;
+
+}
+
+#departureTime, #arrivalTime {
+    width: 5ch;
+}
+
+#departureDate, #arrivalDate {
+    width: 10ch;
+}
+
+#plane {
+    width: 20ch;
+}
+
+input {
+
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+input[type="button"] {
+    margin-top: 10px;
+}

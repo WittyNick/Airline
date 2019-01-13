@@ -1,35 +1,71 @@
 package by.gstu.airline.test;
 
 import by.gstu.airline.config.ConfigurationManager;
-import by.gstu.airline.entity.Crew;
-import by.gstu.airline.entity.Employee;
-import by.gstu.airline.entity.Position;
+import by.gstu.airline.entity.*;
 import by.gstu.airline.service.Service;
+import com.google.gson.Gson;
 
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class Helper {
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
     public static void main(String[] args) {
-        resetTables();
-        test();
+//        createDatabase("airlineLite");
+//        resetTables();
+//        test();
     }
 
     private static void test() {
         Service service = Service.INSTANCE;
+        Locale ru = new Locale("ru", "RU");
+        manager.changeLocale(ru);
 
-        List<Employee> employeeList = Arrays.asList(
-                new Employee("Name1", "Surname1", Position.PILOT),
-                new Employee("Name2", "Surname2", Position.STEWARDESS)
-        );
-//        service.create(employeeList);
-//        service.deleteEmployeeList(employeeList);
+//        Employee pilot1 = new Employee("Иван", "Драго", Position.PILOT);
+//        Employee stewardess1 = new Employee("Татьяна", "Минеева", Position.STEWARDESS);
+//        Employee stewardess2 = new Employee("Наталия", "Правдина", Position.STEWARDESS);
+//        Employee navigator1 = new Employee("Джейсон", "Борн", Position.NAVIGATOR);
+//        Employee communicator1 = new Employee("Игорь", "Крутой", Position.COMMUNICATOR);
+//        service.create(pilot1);
+//        service.create(stewardess1);
+//        service.create(stewardess2);
+//        service.create(navigator1);
+//        service.create(communicator1);
 
-        Crew crew1 = new Crew("Ветерок1", employeeList);
-        Crew crew2 = new Crew("Ветерок2", null);
+//        Crew crew1 = new Crew("Ветерок1");
+//        service.create(crew1);
+//
+//        service.create(new Member(crew1, pilot1));
+//        service.create(new Member(crew1, stewardess1));
+//
+//        Flight flight1 = new Flight(
+//                104,
+//                "Минск",
+//                "Москва",
+//                "31.12.2018",
+//                "23:00",
+//                "01.01.2019",
+//                "01:00",
+//                "SuperJet"
+//        );
+//        Flight flight2 = new Flight(
+//                204,
+//                "Moscow",
+//                "Minsk",
+//                "01.01.2019",
+//                "02:00",
+//                "01.01.2019",
+//                "04:00",
+//                "Ty-154"
+//        );
+//        service.create(flight1);
+//        service.create(flight2);
+//
+//        flight2.setCrew(crew1);
+//        service.update(flight2);
     }
 
 
@@ -86,51 +122,52 @@ public class Helper {
         statement.executeUpdate("DROP TABLE IF EXISTS employees");
         statement.executeUpdate("DROP TABLE IF EXISTS crews");
         statement.executeUpdate("DROP TABLE IF EXISTS flights");
-        statement.executeUpdate("DROP TABLE IF EXISTS crew_employee");
+        statement.executeUpdate("DROP TABLE IF EXISTS members");
         System.out.println("deleteEmployeeList tables - success!");
     }
 
     // flights
     private static String getCreateFlightsQuery() {
         StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS flights (");
-        sql.append("id                INTEGER NOT NULL AUTO_INCREMENT, ");
-        sql.append("flightNumber      INTEGER, ");
-        sql.append("startPoint        VARCHAR(30), ");
-        sql.append("departureDateTime LONG, ");
-        sql.append("arrivalDateTime   LONG, ");
-        sql.append("plane             VARCHAR(10), ");
-        sql.append("crew              INTEGER, ");
-        sql.append("PRIMARY KEY (id))");
+        sql.append("id                INTEGER NOT NULL AUTO_INCREMENT,             ");
+        sql.append("flightNumber      INTEGER,                                     ");
+        sql.append("startPoint        VARCHAR(30),                                 ");
+        sql.append("destinationPoint  VARCHAR(30),                                 ");
+        sql.append("departureDateTime LONG,                                        ");
+        sql.append("arrivalDateTime   LONG,                                        ");
+        sql.append("plane             VARCHAR(10),                                 ");
+        sql.append("crew              INTEGER,                                     ");
+        sql.append("PRIMARY KEY (id))                                              ");
         return sql.toString();
     }
 
     // crews
     private static String getCreateCrewQuery() {
         StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS crews (");
-        sql.append("id   INTEGER NOT NULL AUTO_INCREMENT, ");
-        sql.append("name VARCHAR(30), ");
-        sql.append("PRIMARY KEY (id))");
+        sql.append("id   INTEGER NOT NULL AUTO_INCREMENT,                        ");
+        sql.append("name VARCHAR(30),                                            ");
+        sql.append("PRIMARY KEY (id))                                            ");
         return sql.toString();
     }
 
     // members
     private static String getCreateMemberQuery() {
         StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS members (");
-        sql.append("id         INTEGER NOT NULL AUTO_INCREMENT, ");
-        sql.append("crewId     INTEGER, ");
-        sql.append("employeeId INTEGER, ");
-        sql.append("PRIMARY KEY (id))");
+        sql.append("id         INTEGER NOT NULL AUTO_INCREMENT,                    ");
+        sql.append("crewId     INTEGER,                                            ");
+        sql.append("employeeId INTEGER,                                            ");
+        sql.append("PRIMARY KEY (id))                                              ");
         return sql.toString();
     }
 
     // employees
     private static String getCreateEmployeeQuery() {
         StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS employees (");
-        sql.append("id       INTEGER NOT NULL AUTO_INCREMENT, ");
-        sql.append("name     VARCHAR(30), ");
-        sql.append("surname  VARCHAR(30), ");
-        sql.append("position INTEGER, ");
-        sql.append("PRIMARY KEY (id))");
+        sql.append("id       INTEGER NOT NULL AUTO_INCREMENT,                        ");
+        sql.append("name     VARCHAR(30),                                            ");
+        sql.append("surname  VARCHAR(30),                                            ");
+        sql.append("position INTEGER,                                                ");
+        sql.append("PRIMARY KEY (id))                                                ");
         return sql.toString();
     }
 
@@ -165,4 +202,6 @@ public class Helper {
             e.printStackTrace();
         }
     }
+
+    // TRUNCATE TABLE employees;
 }

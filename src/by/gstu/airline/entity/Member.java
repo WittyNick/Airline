@@ -8,6 +8,15 @@ public class Member {
     public Member() {
     }
 
+    public Member(int crewId, int employeeId) {
+        this.crewId = crewId;
+        this.employeeId = employeeId;
+    }
+
+    public Member(Crew crew, Employee employee) {
+        this(crew.getId(), employee.getId());
+    }
+
     public int getId() {
         return id;
     }
@@ -30,5 +39,14 @@ public class Member {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", crewId=" + crewId +
+                ", employeeId=" + employeeId +
+                '}';
     }
 }

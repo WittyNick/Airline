@@ -13,15 +13,19 @@ import java.util.List;
 
 public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
     final ConfigurationManager manager = ConfigurationManager.INSTANCE;
-    private final ProxyConnectionPool connectionPool;
+    final ProxyConnectionPool connectionPool;
 
     GenericDaoJdbc() {
-        connectionPool = FactoryDaoJdbc.getProxyConnectionPool();
+        connectionPool = DaoFactoryJdbc.getProxyConnectionPool();
     }
 
     protected abstract String getCreateQuery();
 
     protected abstract String getSelectQuery();
+
+    protected String getSelectByIdQuery(int id) { // overridden in subclasses
+        return getSelectQuery() + " WHERE id = " + id;
+    }
 
     protected abstract String getUpdateQuery();
 
@@ -46,7 +50,7 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             prepareStatementForCreate(statement, entity);
             if (statement.executeUpdate() >= 1) {
-                System.out.println("created successfully");
+//                System.out.println("created successfully");
                 ResultSet resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     id = resultSet.getInt(1);
@@ -62,7 +66,7 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
 
     @Override
     public T readById(int id) {
-        String sql = getSelectQuery() + " WHERE id = " + id;
+        String sql = getSelectByIdQuery(id);
         List<T> list = read(sql);
         if (list == null || list.isEmpty()) {
             return null;
@@ -85,9 +89,9 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             prepareStatementForUpdate(statement, entity);
-            if (statement.executeUpdate() >= 1) {
-                System.out.println("updated successfully");
-            }
+//            if (statement.executeUpdate() >= 1) {
+//                System.out.println("updated successfully");
+//            }
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -104,9 +108,9 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             prepareStatementForDelete(statement, entity);
-            if (statement.executeUpdate() >= 1) {
-                System.out.println("deleted successfully");
-            }
+//            if (statement.executeUpdate() >= 1) {
+//                System.out.println("deleted successfully");
+//            }
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -118,11 +122,10 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
         List<T> list = null;
         ProxyConnection connection = null;
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
         try {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(selectQuery);
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             list = parseResultSet(resultSet);
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
@@ -132,7 +135,7 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
         return list;
     }
 
-    private void close(ProxyConnection connection, PreparedStatement statement) {
+    void close(ProxyConnection connection, PreparedStatement statement) {
         try {
             if (statement != null) {
                 statement.close();

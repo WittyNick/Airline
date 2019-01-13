@@ -28,6 +28,11 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
     }
 
     @Override
+    protected String getSelectByIdQuery(int id) {
+        return getSelectQuery() + " WHERE " + manager.getQuery("flight.select.table.id") + " = " + id;
+    }
+
+    @Override
     protected String getUpdateQuery() {
         return manager.getQuery("flight.update");
     }
@@ -45,7 +50,11 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
         statement.setLong(4, stringToDate(entity.getDepartureDate(), entity.getDepartureTime()).getTime());
         statement.setLong(5, stringToDate(entity.getArrivalDate(), entity.getArrivalTime()).getTime());
         statement.setString(6, entity.getPlane());
-        statement.setInt(7, entity.getCrew().getId());
+        if (entity.getCrew() != null) {
+            statement.setInt(7, entity.getCrew().getId());
+        } else {
+            statement.setInt(7, 0);
+        }
     }
 
     @Override
@@ -56,7 +65,11 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
         statement.setLong(4, stringToDate(entity.getDepartureDate(), entity.getDepartureTime()).getTime());
         statement.setLong(5, stringToDate(entity.getArrivalDate(), entity.getArrivalTime()).getTime());
         statement.setString(6, entity.getPlane());
-        statement.setInt(7, entity.getCrew().getId());
+        if (entity.getCrew() != null) {
+            statement.setInt(7, entity.getCrew().getId());
+        } else {
+            statement.setInt(7, 0);
+        }
         statement.setInt(8, entity.getId());
     }
 
@@ -71,11 +84,10 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
         Flight flight = new Flight();
         List<Employee> employeeList = new ArrayList<>();
         int flightIdTmp = -1;
-        boolean firstIteration = true;
         while (resultSet.next()) {
             int flightId = resultSet.getInt(manager.getQuery("flight.select.column.id"));
             if (flightIdTmp != flightId) {
-                if (!firstIteration) {
+                if (flightIdTmp > 0) {
                     list.add(flight);
                     flight = new Flight();
                     employeeList = new ArrayList<>();
@@ -90,9 +102,12 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
                 flight.setDepartureTime(toTimeString(departureDateTime));
                 flight.setArrivalDate(toDateString(arrivalDateTime));
                 flight.setArrivalTime(toTimeString(arrivalDateTime));
+
                 flight.setPlane(resultSet.getString(manager.getQuery("flight.select.column.plane")));
-                int crewId = resultSet.getInt(resultSet.getInt(manager.getQuery("flight.select.column.crew.id")));
-                if (crewId != 0) {
+
+                int crewId = resultSet.getInt(manager.getQuery("flight.select.column.crew.id"));
+
+                if (crewId > 0) {
                     Crew crew = new Crew();
                     crew.setId(crewId);
                     crew.setName(resultSet.getString(manager.getQuery("flight.select.column.crew.name")));
@@ -100,12 +115,14 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
                     flight.setCrew(crew);
                 }
                 flightIdTmp = flightId;
-                firstIteration = false;
             }
             Employee employee = parseEmployee(resultSet);
             if (employee != null) {
                 employeeList.add(employee);
             }
+        }
+        if (flightIdTmp > 0) {
+            list.add(flight);
         }
         return list;
     }

@@ -3,10 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>ADMINISTRATOR PAGE</title>
+    <link rel="stylesheet" href="css/administrator.css">
+    <script src="js/administrator.js"></script>
 </head>
 <body>
-Это страница администратора
+<div id="content">
+    <div id="header">
+        <div id="divSignIn">
+            <a href="./">main</a>
+        </div>
+    </div>
 
-<script src="js/administrator.js"></script>
+    <table id="mainTable">
+        <caption>Flights</caption>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Number</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+            <th>Plane</th>
+            <th>crewId</th>
+            <th>Crew</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+    <div id="buttons">
+        <form id="formEdit" method="POST" action="administrator/edit">
+            <input id="flightId" type="hidden" name="flightId">
+            <input type="button" value="Edit" onclick="buttonEditAction()">
+            <input type="button" value="Add" onclick="buttonAddAction()">
+            <input type="button" value="Delete" onclick="buttonDeleteAction()">
+        </form>
+    </div>
+</div>
 </body>
 </html>

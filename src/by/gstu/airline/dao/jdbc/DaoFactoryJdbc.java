@@ -6,12 +6,12 @@ import by.gstu.airline.dao.jdbc.connection.ProxyConnectionPool;
 
 import java.sql.SQLException;
 
-public class FactoryDaoJdbc extends FactoryDao {
-    private static FactoryDaoJdbc instance;
+public class DaoFactoryJdbc extends DaoFactory {
+    private static DaoFactoryJdbc instance;
     private static ProxyConnectionPool proxyConnectionPool;
     private static ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
-    private FactoryDaoJdbc() {
+    private DaoFactoryJdbc() {
     }
 
     @Override
@@ -34,9 +34,9 @@ public class FactoryDaoJdbc extends FactoryDao {
         return new MemberDaoJdbc();
     }
 
-    public static synchronized FactoryDao getDaoFactory() {
+    public static synchronized DaoFactory getDaoFactory() {
         if (instance == null) {
-            instance = new FactoryDaoJdbc();
+            instance = new DaoFactoryJdbc();
         }
         return instance;
     }

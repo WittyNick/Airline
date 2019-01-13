@@ -24,6 +24,11 @@ public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
     }
 
     @Override
+    protected String getSelectByIdQuery(int id) {
+        return getSelectQuery() + " WHERE " + manager.getQuery("crew.select.table.id") + " = " + id;
+    }
+
+    @Override
     protected String getUpdateQuery() {
         return manager.getQuery("crew.update");
     }
@@ -49,17 +54,18 @@ public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
         statement.setInt(1, entity.getId());
     }
 
+    // employeeList может быть пустым, тогда должен быть null
     @Override
     protected List<Crew> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Crew> list = new ArrayList<>();
         Crew crew = new Crew();
         List<Employee> employeeList = new ArrayList<>();
         int crewIdTmp = -1;
-        boolean firstIteration = true;
+
         while (resultSet.next()) {
             int crewId = resultSet.getInt(manager.getQuery("crew.select.column.id"));
             if (crewIdTmp != crewId) {
-                if (!firstIteration) {
+                if (crewIdTmp > 0) {
                     list.add(crew);
                     crew = new Crew();
                     employeeList = new ArrayList<>();
@@ -68,12 +74,15 @@ public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
                 crew.setName(resultSet.getString(manager.getQuery("crew.select.column.name")));
                 crew.setEmployeeList(employeeList);
                 crewIdTmp = crewId;
-                firstIteration = false;
+
             }
             Employee employee = parseEmployee(resultSet);
             if (employee != null) {
                 employeeList.add(employee);
             }
+        }
+        if (crewIdTmp > 0) {
+            list.add(crew);
         }
         return list;
     }

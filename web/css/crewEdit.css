@@ -1,0 +1,51 @@
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+th {
+    background: #dcdcdc;
+}
+
+th, td {
+    cursor: default;
+}
+
+input {
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 3px;
+}
+
+select {
+    padding: 3px;
+}
+
+#employeeList,
+#employeeBase {
+    min-width: 500px;
+}
+
+#employeeList th,
+#employeeList td,
+#employeeBase th,
+#employeeBase td {
+    border: 1px solid;
+    padding: 3px;
+}
+
+#content {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selected {
+    background-color: #ccffff;
+}
+
+#buttons {
+    text-align: center;
+    margin-top: 10px;
+}
