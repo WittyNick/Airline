@@ -1,4 +1,4 @@
-package by.gstu.airline.servlet;
+package by.gstu.airline.controller.servlet;
 
 import by.gstu.airline.entity.Crew;
 import by.gstu.airline.entity.Employee;
@@ -17,8 +17,11 @@ public class CrewEditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Service service = Service.INSTANCE;
-        String css = req.getContextPath() + "/css/crewEdit.css";
-        String js = req.getContextPath() + "/js/crewEdit.js";
+        String contextPath = req.getContextPath();
+        String favicon = contextPath + "/img/favicon.ico";
+        String cssHeader = contextPath + "/css/header.css";
+        String css = contextPath + "/css/crewEdit.css";
+        String js = contextPath + "/js/crewEdit.js";
         int flightId = Integer.parseInt(req.getParameter("flightId"));
         int crewId = Integer.parseInt(req.getParameter("crewId"));
 
@@ -50,11 +53,31 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<head>");
         out.println("<meta charset=\"UTF-8\">");
         out.println("<title>CREW EDIT</title>");
+        out.println("<link rel=\"shortcut icon\" href=\"" + favicon + "\" type=\"image/x-icon\">");
+        out.println("<link rel=\"stylesheet\" href=\"" + cssHeader + "\">");
         out.println("<link rel=\"stylesheet\" href=\"" + css + "\">");
         out.println("<script src=\"" + js + "\"></script>");
         out.println("</head>");
         out.println("<body>");
         out.println("<div id=\"content\">");
+
+        out.println("<table id=\"header\">");
+        out.println("<tr>");
+        out.println("<td id=\"space\"></td>");
+        out.println("<td class=\"tab\"><a href=\"../..\">main</a></td>");
+        out.println("<td class=\"picketTab\">dispatcher</td>");
+        out.println("<td id=\"locale\">");
+        out.println("<select id=\"lang\">");
+        out.println("<option value=\"en_US\">english</option>");
+        out.println("<option value=\"ru_RU\">русский</option>");
+        out.println("</select>");
+        out.println("</td>");
+        out.println("<td id=\"sign\">");
+        out.println("<span class=\"pseudolink\" onclick=\"signOut()\">sign out</span>");
+        out.println("</td>");
+        out.println("</tr>");
+        out.println("</table>");
+
         out.println("<input id=\"flightId\" type=\"hidden\" value=\"" + flightId + "\">");
         out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
         out.println("<label for=\"name\">crew name:</label><br>");

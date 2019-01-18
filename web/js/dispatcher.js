@@ -2,8 +2,32 @@ var doc = document;
 var tmpSelectedRow = null;
 
 window.onload = function() {
+    localizeDispatcher();
+    doc.getElementById("lang").addEventListener("change", function() {
+        var body = "locale=" + document.getElementById("lang").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "locale/change", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                if ("ok" === xhr.responseText) {
+                    localizeDispatcher();
+                    clearMainTable();
+                    fillMainTable();
+                }
+            }
+        };
+        xhr.send(body);
+    });
     fillMainTable();
 };
+
+function clearMainTable() {
+    var tableBody = doc.getElementById("tableBody");
+    while (tableBody.hasChildNodes()) {
+        tableBody.removeChild(tableBody.lastChild);
+    }
+}
 
 function buttonEditAction() {
     if (tmpSelectedRow == null) {
@@ -123,4 +147,15 @@ function selectTableRow(row) {
     }
     row.classList.add("selected");
     tmpSelectedRow = row;
+}
+
+function signOut() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "signout", true);
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            doc.location.href = "./";
+        }
+    };
+    xhr.send();
 }

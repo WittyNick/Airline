@@ -89,9 +89,9 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             prepareStatementForUpdate(statement, entity);
-//            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() >= 1) {
 //                System.out.println("updated successfully");
-//            }
+            }
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -108,9 +108,9 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             prepareStatementForDelete(statement, entity);
-//            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() >= 1) {
 //                System.out.println("deleted successfully");
-//            }
+            }
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         } finally {

@@ -8,112 +8,171 @@
         <welcome-file>welcome.html</welcome-file>
     </welcome-file-list>
 
+    <!-- Servlets -->
+
     <servlet>
-        <servlet-name>welcome</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.WelcomeServlet</servlet-class>
+        <servlet-name>welcomeServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.WelcomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>welcome</servlet-name>
+        <servlet-name>welcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userValidateServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.UserValidateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userValidateServlet</servlet-name>
+        <url-pattern>/user/validate</url-pattern>
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>signIn</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.SignInServlet</servlet-class>
+        <servlet-name>signInServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.SignInServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>signIn</servlet-name>
+        <servlet-name>signInServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>administrator</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.AdministratorServlet</servlet-class>
+        <servlet-name>signOutServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.SignOutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>administrator</servlet-name>
+        <servlet-name>signOutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>administratorServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.AdministratorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>administratorServlet</servlet-name>
         <url-pattern>/administrator</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>flightEdit</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.FlightEditServlet</servlet-class>
+        <servlet-name>flightEditServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.FlightEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>flightEdit</servlet-name>
+        <servlet-name>flightEditServlet</servlet-name>
         <url-pattern>/administrator/edit</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>flightSave</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.FlightSaveServlet</servlet-class>
+        <servlet-name>flightSaveServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.FlightSaveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>flightSave</servlet-name>
+        <servlet-name>flightSaveServlet</servlet-name>
         <url-pattern>/administrator/save</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>flightDelete</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.FlightDeleteServlet</servlet-class>
+        <servlet-name>flightDeleteServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.FlightDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>flightDelete</servlet-name>
+        <servlet-name>flightDeleteServlet</servlet-name>
         <url-pattern>/flight/delete</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.DispatcherServlet</servlet-class>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.DispatcherServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/dispatcher</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>crewEdit</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.CrewEditServlet</servlet-class>
+        <servlet-name>crewEditServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.CrewEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>crewEdit</servlet-name>
+        <servlet-name>crewEditServlet</servlet-name>
         <url-pattern>/dispatcher/crew/edit</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>crewSave</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.CrewSaveServlet</servlet-class>
+        <servlet-name>crewSaveServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.CrewSaveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>crewSave</servlet-name>
+        <servlet-name>crewSaveServlet</servlet-name>
         <url-pattern>/dispatcher/crew/save</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>crewDelete</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.CrewDeleteServlet</servlet-class>
+        <servlet-name>crewDeleteServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.CrewDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>crewDelete</servlet-name>
+        <servlet-name>crewDeleteServlet</servlet-name>
         <url-pattern>/crew/delete</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>employeeAdd</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.EmployeeAddServlet</servlet-class>
+        <servlet-name>employeeAddServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.EmployeeAddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>employeeAdd</servlet-name>
+        <servlet-name>employeeAddServlet</servlet-name>
         <url-pattern>/dispatcher/crew/employee/add</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>employeeDelete</servlet-name>
-        <servlet-class>by.gstu.airline.servlet.EmployeeDeleteServlet</servlet-class>
+        <servlet-name>employeeDeleteServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.EmployeeDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>employeeDelete</servlet-name>
+        <servlet-name>employeeDeleteServlet</servlet-name>
         <url-pattern>/dispatcher/crew/employee/delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>localeServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.LocaleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>localeServlet</servlet-name>
+        <url-pattern>/locale</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>localeChangeServlet</servlet-name>
+        <servlet-class>by.gstu.airline.controller.servlet.LocaleChangeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>localeChangeServlet</servlet-name>
+        <url-pattern>/locale/change</url-pattern>
+    </servlet-mapping>
+
+    <!-- Filters -->
+
+    <filter>
+        <filter-name>administratorFilter</filter-name>
+        <filter-class>by.gstu.airline.controller.filter.AdministratorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>administratorFilter</filter-name>
+        <url-pattern>/administrator/*</url-pattern>
+        <url-pattern>/flight/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>dispatcherFilter</filter-name>
+        <filter-class>by.gstu.airline.controller.filter.DispatcherFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>dispatcherFilter</filter-name>
+        <url-pattern>/dispatcher/*</url-pattern>
+        <url-pattern>/crew/*</url-pattern>
+    </filter-mapping>
 </web-app>

@@ -86,10 +86,12 @@ function addToCrewAction() {
 }
 
 function engageEmployeeAction() {
+    var inputNewEmployeeName = doc.getElementById("newEmployeeName");
+    var inputNewEmployeeSurname = doc.getElementById("newEmployeeSurname");
     var employeeSend = {
         "id": 0,
-        "name": doc.getElementById("newEmployeeName").value,
-        "surname": doc.getElementById("newEmployeeSurname").value,
+        "name": inputNewEmployeeName.value,
+        "surname": inputNewEmployeeSurname.value,
         "position": doc.getElementById("newEmployeePosition").value
     };
     var xhr = new XMLHttpRequest();
@@ -117,6 +119,8 @@ function engageEmployeeAction() {
             row.addEventListener("click", onEmployeeListRowClick);
             doc.getElementById("employeeListBody").appendChild(row);
             row.click();
+            inputNewEmployeeName.value = "";
+            inputNewEmployeeSurname.value = "";
         }
     };
     xhr.send(JSON.stringify(employeeSend));
@@ -187,4 +191,15 @@ function saveAction() {
 
 function cancelAction() {
     doc.location.href = "../../dispatcher";
+}
+
+function signOut() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../../signout", true);
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+
+        }
+    };
+    xhr.send();
 }

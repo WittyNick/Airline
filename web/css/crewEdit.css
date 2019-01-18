@@ -42,10 +42,17 @@ select {
 }
 
 .selected {
-    background-color: #ccffff;
+    background-color: #add8ef;
 }
 
 #buttons {
     text-align: center;
     margin-top: 10px;
+}
+
+#employeeList th:nth-child(1), #employeeList td:nth-child(1),
+#employeeList th:nth-child(4), #employeeList td:nth-child(4),
+#employeeBase th:nth-child(1), #employeeBase td:nth-child(1),
+#employeeBase th:nth-child(4), #employeeBase td:nth-child(4) {
+    display: none;
 }

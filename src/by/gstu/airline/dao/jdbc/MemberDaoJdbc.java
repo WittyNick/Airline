@@ -74,9 +74,9 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             statement.setInt(1, crewId);
-//            if (statement.executeUpdate() >= 1) {
+            if (statement.executeUpdate() >= 1) {
 //                System.out.println("deleted successfully");
-//            }
+            }
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         } finally {

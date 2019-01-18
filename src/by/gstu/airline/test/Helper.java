@@ -14,6 +14,7 @@ public class Helper {
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
     public static void main(String[] args) {
+//        System.out.println(new Locale("ru", "RU"));
 //        createDatabase("airlineLite");
 //        resetTables();
 //        test();
@@ -204,4 +205,8 @@ public class Helper {
     }
 
     // TRUNCATE TABLE employees;
+
+    //    ALTER DATABASE database_name
+    //    CHARACTER SET utf8mb4
+    //    COLLATE utf8mb4_unicode_ci;
 }

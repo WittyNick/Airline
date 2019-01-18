@@ -2,22 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LOGIN PAGE</title>
+    <title>LOGIN</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/signIn.css">
+    <script src="js/locale.js"></script>
     <script src="js/signIn.js"></script>
 </head>
 <body>
-<div>
-    <fieldset>
-        <legend>Sign In</legend>
-        <form>
-            <label for="login">login:</label><br>
-            <input id="login" name="login" type="text" tabindex="1" autofocus><br>
+<div id="content">
+    <table id="header">
+        <tr>
+            <td id="locale">
+                <select id="lang">
+                    <option value="default">default</option>
+                    <option value="en_US">english</option>
+                    <option value="ru_RU">русский</option>
+                </select>
+            </td>
+            <td id="sign"></td>
+        </tr>
+    </table>
 
-            <label for="password">password:</label><br>
-            <input id="password" name="password" type="password" tabindex="2" autofocus><br>
+    <fieldset id="fieldsetLogIn">
+        <legend id="legendFieldset">Sign In</legend>
+        <form >
+            <label id="labelLogin" for="login">login:</label><br>
+            <input id="login" name="login" type="text" value="dispatcher" tabindex="1" autofocus><br>
+
+            <label id="labelPassword" for="password">password:</label><br>
+            <input id="password" name="password" type="password" value="dispatcher" tabindex="2" autofocus><br>
 
             <input id="buttonSubmit" type="button" value="Enter" tabindex="3" autofocus>
+            <input id="buttonCancel" type="button" value="Cancel" onclick=document.location.href="./">
         </form>
     </fieldset>
 </div>

@@ -2,22 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ADMINISTRATOR PAGE</title>
+    <title>ADMINISTRATOR</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/administrator.css">
+    <script src="js/locale.js"></script>
     <script src="js/administrator.js"></script>
 </head>
+
 <body>
 <div id="content">
-    <div id="header">
-        <div id="divSignIn">
-            <a href="./">main</a>
-        </div>
-    </div>
+    <table id="header">
+        <tr>
+            <td id="space"></td>
+            <td id="mainTab" class="tab"><a href="./">main</a></td>
+            <td id="administratorTab" class="picketTab">administrator</td>
+            <td id="locale">
+                <select id="lang">
+                    <option value="default">default</option>
+                    <option value="en_US">english</option>
+                    <option value="ru_RU">русский</option>
+                </select>
+            </td>
+            <td id="sign">
+                <span class="pseudolink" onclick="signOut()">sign out</span>
+            </td>
+        </tr>
+    </table>
 
     <table id="mainTable">
-        <caption>Flights</caption>
+        <caption id="tableCaption">Flights</caption>
         <thead>
-        <tr>
+        <tr id="hatRow">
             <th>id</th>
             <th>Number</th>
             <th>From</th>
@@ -37,9 +53,9 @@
     <div id="buttons">
         <form id="formEdit" method="POST" action="administrator/edit">
             <input id="flightId" type="hidden" name="flightId">
-            <input type="button" value="Edit" onclick="buttonEditAction()">
-            <input type="button" value="Add" onclick="buttonAddAction()">
-            <input type="button" value="Delete" onclick="buttonDeleteAction()">
+            <input id="buttonEdit" type="button" value="Edit" onclick="buttonEditAction()">
+            <input id="buttonAdd" type="button" value="Add" onclick="buttonAddAction()">
+            <input id="buttonDelete" type="button" value="Delete" onclick="buttonDeleteAction()">
         </form>
     </div>
 </div>

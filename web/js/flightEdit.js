@@ -33,3 +33,13 @@ function buttonCancelAction() {
     doc.location.href = "../administrator";
 }
 
+function signOut() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../signout", true);
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            doc.location.href = "../";
+        }
+    };
+    xhr.send();
+}

@@ -1,10 +1,24 @@
 var doc = document;
 
 window.onload = function() {
+    localizeSignIn();
+    doc.getElementById("lang").addEventListener("change", function() {
+        var body = "locale=" + document.getElementById("lang").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "locale/change", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                if ("ok" === xhr.responseText) {
+                    localizeSignIn();
+                }
+            }
+        };
+        xhr.send(body);
+    });
     var buttonSubmit = doc.getElementById("buttonSubmit");
     buttonSubmit.addEventListener("click", buttonSubmitAction, false);
 };
-
 
 /*
 Авторизация пользователя.

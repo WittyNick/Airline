@@ -2,22 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DISPATCHER PAGE</title>
+    <title>DISPATCHER</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/dispatcher.css">
+    <script src="js/locale.js"></script>
     <script src="js/dispatcher.js"></script>
 </head>
 <body>
 
 <div id="content">
-    <div id="header">
-        <div id="divSignIn">
-            <a href="./">main</a>
-        </div>
-    </div>
-    <table id="mainTable">
-        <caption>Flights</caption>
-        <thead>
+    <table id="header">
         <tr>
+            <td id="space"></td>
+            <td id="mainTab" class="tab"><a href="./">main</a></td>
+            <td id="dispatcherTab" class="picketTab">dispatcher</td>
+            <td id="locale">
+                <select id="lang">
+                    <option value="default">default</option>
+                    <option value="en_US">english</option>
+                    <option value="ru_RU">русский</option>
+                </select>
+            </td>
+            <td id="sign">
+                <span class="pseudolink" onclick="signOut()">sign out</span>
+            </td>
+        </tr>
+    </table>
+
+    <table id="mainTable">
+        <caption id="tableCaption">Flights</caption>
+        <thead>
+        <tr id="hatRow">
             <th>id</th>
             <th>Number</th>
             <th>From</th>
@@ -38,8 +54,8 @@
         <form id="formEdit" method="POST" action="dispatcher/crew/edit">
             <input id="flightId" type="hidden" name="flightId">
             <input id="crewId" type="hidden" name="crewId">
-            <input type="button" value="Edit" onclick="buttonEditAction()">
-            <input type="button" value="Delete Crew" onclick="buttonDeleteCrewAction()">
+            <input id="buttonEdit" type="button" value="Edit Crew" onclick="buttonEditAction()">
+            <input id="buttonDelete" type="button" value="Delete Crew" onclick="buttonDeleteCrewAction()">
         </form>
     </div>
 </div>

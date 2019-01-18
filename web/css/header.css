@@ -1,0 +1,72 @@
+#header {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#header td:not(.picketTab) {
+    border-bottom: 2px solid;
+}
+
+#header ::selection {
+    background: transparent;
+}
+
+.picketTab, .tab {
+    width: 120px;
+    padding: 3px;
+}
+
+.tab {
+    border: 1px solid;
+}
+
+.tab a, .tab a:visited, .tab a:active {
+    display: block;
+    color: #000000;
+}
+
+.picketTab {
+    font-weight: bold;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    cursor: default;
+}
+
+#locale {
+    text-align: right;
+}
+
+#sign {
+    width: 100px;
+    font-weight: bold;
+}
+
+#header a {
+    text-decoration: none;
+}
+
+#header .hidden {
+    display: none;
+}
+
+#space {
+    width: 10px;
+}
+
+#header select {
+    padding: 3px;
+}
+
+.pseudolink {
+    color: #1e90ff;
+    cursor: pointer;
+    transition-property: color;
+    transition-duration: 200ms;
+}
+
+.pseudolink:hover {
+    color: black;
+}

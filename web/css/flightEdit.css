@@ -4,21 +4,17 @@
     margin-right: auto;
 }
 
+#formMain {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 #flightNumber {
     width: 30ch;
 }
 
 #startPoint, #destinationPoint {
     width: 30ch;
-
-}
-
-#departureTime, #arrivalTime {
-    width: 5ch;
-}
-
-#departureDate, #arrivalDate {
-    width: 10ch;
 }
 
 #plane {
@@ -26,9 +22,9 @@
 }
 
 input {
-
     margin-left: 2px;
     margin-right: 2px;
+    padding: 3px;
 }
 
 input[type="button"] {
