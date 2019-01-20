@@ -14,7 +14,7 @@ import java.io.IOException;
 public class CrewSaveServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Service service = Service.INSTANCE;
         resp.setContentType("text/plain; charset=UTF-8");
         BufferedReader reader = req.getReader();

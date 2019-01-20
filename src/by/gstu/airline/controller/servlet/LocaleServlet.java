@@ -14,8 +14,7 @@ import java.util.Map;
 public class LocaleServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("POST in LocaleServlet");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ConfigurationManager manager = ConfigurationManager.INSTANCE;
         BufferedReader reader = req.getReader();
         String json = "";
@@ -30,7 +29,7 @@ public class LocaleServlet extends HttpServlet {
         manager.changeLocale(new Locale(localeArr[0], localeArr[1]));
 
         Map<String, String> map = new HashMap<>();
-//        map.put("locale", locale);
+        map.put("locale", locale);
         for (String parameter : requestParameters) {
             map.put(parameter, manager.getText(parameter));
         }

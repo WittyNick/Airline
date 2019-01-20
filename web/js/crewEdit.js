@@ -3,22 +3,24 @@ var tmpSelectedCrewRow = null;
 var tmpSelectedBaseRow = null;
 
 window.onload = function() {
-    localize();
+    localizeCrewEdit();
+    doc.getElementById("lang").addEventListener("change", function() {
+        var body = "locale=" + document.getElementById("lang").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "locale/change", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                if ("ok" === xhr.responseText) {
+                    localizeCrewEdit();
+                }
+            }
+        };
+        xhr.send(body);
+    });
     addEmployeeListSelect();
     addEmployeeBaseSelect();
 };
-
-function localize() {
-    var employeeListRows = doc.getElementById("employeeListBody").children;
-    for (var i = 0; i < employeeListRows.length; i++) {
-        employeeListRows[i].children[4].innerText = employeeListRows[i].children[3].innerText.toLowerCase();
-    }
-
-    var employeeBaseRows = doc.getElementById("employeeBaseBody").children;
-    for (var j = 0; j < employeeBaseRows.length; j++) {
-        employeeBaseRows[j].children[4].innerText = employeeBaseRows[j].children[3].innerText.toLowerCase();
-    }
-}
 
 function addEmployeeListSelect() {
     var employeeListRows = doc.getElementById("employeeListBody").children;
@@ -115,7 +117,7 @@ function engageEmployeeAction() {
             tdName.innerText = employeeResponse["name"];
             tdSurname.innerText = employeeResponse["surname"];
             tdPositionEnum.innerText = employeeResponse["position"];
-            tdPosition.innerText = employeeResponse["position"].toLowerCase(); // TODO: локализацию не забыть
+            tdPosition.innerText = responseObject[employeeResponse["position"].toLowerCase()]; // localization
             row.addEventListener("click", onEmployeeListRowClick);
             doc.getElementById("employeeListBody").appendChild(row);
             row.click();
@@ -198,7 +200,7 @@ function signOut() {
     xhr.open("POST", "../../signout", true);
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-
+            doc.location.href = "../../";
         }
     };
     xhr.send();

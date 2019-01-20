@@ -10,8 +10,7 @@ import java.util.Locale;
 public class LocaleChangeServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("POST in LocaleChangeServlet");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/plain; charset=UTF-8");
         String locale = req.getParameter("locale");
 

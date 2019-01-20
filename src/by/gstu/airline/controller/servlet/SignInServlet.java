@@ -16,7 +16,7 @@ public class SignInServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         resp.setContentType("text/plain; charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -29,7 +29,7 @@ public class SignInServlet extends HttpServlet {
             session.setAttribute("role", "dispatcher");
             printWriter.print("dispatcher");
         } else {
-            printWriter.print("guest");
+            printWriter.print("fail");
         }
     }
 }

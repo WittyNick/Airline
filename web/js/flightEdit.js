@@ -1,6 +1,24 @@
 var doc = document;
 
-function buttonOkAction() {
+window.onload = function() {
+    localizeFligntEdit();
+    doc.getElementById("lang").addEventListener("change", function() {
+        var body = "locale=" + document.getElementById("lang").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "locale/change", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                if ("ok" === xhr.responseText) {
+                    localizeFligntEdit();
+                }
+            }
+        };
+        xhr.send(body);
+    });
+};
+
+function buttonSaveAction() {
     var flight = {
         "id": Number(doc.getElementById("id").value),
         "flightNumber": Number(doc.getElementById("flightNumber").value),

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class WelcomeServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Gson gson = new Gson();
         Service service = Service.INSTANCE;
         String json = gson.toJson(service.readAllFlight());

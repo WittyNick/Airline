@@ -17,7 +17,7 @@ public class AdministratorServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Service service = Service.INSTANCE;
         Gson gson = new Gson();
         String json = gson.toJson(service.readAllFlight());

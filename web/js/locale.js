@@ -30,15 +30,15 @@ function applyLocaleWelcome() {
     doc.getElementById("sign").children[1].innerText = responseObject["sign_out"];
     doc.getElementById("content").lang = responseObject["lang"];
     doc.getElementById("tableCaption").innerText = responseObject["schedule"];
-    var headElements = document.getElementById("hatRow").children;
-    headElements[0].innerHTML = responseObject["number"];
-    headElements[1].innerHTML = responseObject["from"];
-    headElements[2].innerHTML = responseObject["to"];
-    headElements[3].innerHTML = responseObject["departure_date"];
-    headElements[4].innerHTML = responseObject["departure_time"];
-    headElements[5].innerHTML = responseObject["arrival_date"];
-    headElements[6].innerHTML = responseObject["arrival_time"];
-    headElements[7].innerHTML = responseObject["plane"];
+    var headColumns = doc.getElementById("hatRow").children;
+    headColumns[0].innerHTML = responseObject["number"];
+    headColumns[1].innerHTML = responseObject["from"];
+    headColumns[2].innerHTML = responseObject["to"];
+    headColumns[3].innerHTML = responseObject["departure_date"];
+    headColumns[4].innerHTML = responseObject["departure_time"];
+    headColumns[5].innerHTML = responseObject["arrival_date"];
+    headColumns[6].innerHTML = responseObject["arrival_time"];
+    headColumns[7].innerHTML = responseObject["plane"];
 }
 
 // ---------- signIn.html ----------
@@ -57,8 +57,8 @@ function localizeSignIn() {
 function applyLocaleSignIn() {
     doc.getElementById("content").lang = responseObject["lang"];
     doc.getElementById("legendFieldset").innerText = responseObject["legend_sign_in"];
-    doc.getElementById("labelLogin").innerText = responseObject["login"] + ":";
-    doc.getElementById("labelPassword").innerText = responseObject["password"] + ":";
+    doc.getElementById("labelLogin").innerText = responseObject["login"];
+    doc.getElementById("labelPassword").innerText = responseObject["password"];
     doc.getElementById("buttonSubmit").value = responseObject["enter"];
     doc.getElementById("buttonCancel").value = responseObject["cancel"];
 }
@@ -93,21 +93,60 @@ function applyLocaleAdministrator() {
     doc.getElementById("sign").firstElementChild.innerText = responseObject["sign_out"];
     doc.getElementById("content").lang = responseObject["lang"];
     doc.getElementById("tableCaption").innerText = responseObject["flights"];
-    var headElements = document.getElementById("hatRow").children;
-    headElements[1].innerHTML = responseObject["number"];
-    headElements[2].innerHTML = responseObject["from"];
-    headElements[3].innerHTML = responseObject["to"];
-    headElements[4].innerHTML = responseObject["departure_date"];
-    headElements[5].innerHTML = responseObject["departure_time"];
-    headElements[6].innerHTML = responseObject["arrival_date"];
-    headElements[7].innerHTML = responseObject["arrival_time"];
-    headElements[8].innerHTML = responseObject["plane"];
-    headElements[10].innerHTML = responseObject["crew"];
+    var headColumns = document.getElementById("hatRow").children;
+    headColumns[1].innerHTML = responseObject["number"];
+    headColumns[2].innerHTML = responseObject["from"];
+    headColumns[3].innerHTML = responseObject["to"];
+    headColumns[4].innerHTML = responseObject["departure_date"];
+    headColumns[5].innerHTML = responseObject["departure_time"];
+    headColumns[6].innerHTML = responseObject["arrival_date"];
+    headColumns[7].innerHTML = responseObject["arrival_time"];
+    headColumns[8].innerHTML = responseObject["plane"];
+    headColumns[10].innerHTML = responseObject["crew"];
     doc.getElementById("buttonEdit").value = responseObject["flight.edit"];
     doc.getElementById("buttonAdd").value = responseObject["flight.add"];
     doc.getElementById("buttonDelete").value = responseObject["flight.delete"];
 }
 
+// ---------- FlightEditServlet ----------
+function localizeFligntEdit() {
+    var requestArray = [
+        "lang",
+        "main",
+        "administrator",
+        "sign_out",
+        "flight.edit.number",
+        "flight.edit.from",
+        "flight.edit.to",
+        "flight.edit.departure_date",
+        "flight.edit.departure_time",
+        "flight.edit.arrival_date",
+        "flight.edit.arrival_time",
+        "flight.edit.plane",
+        "flight.edit.save",
+        "flight.edit.cancel"
+    ];
+    ajaxPost("locale", requestArray, applyFlightEdit);
+}
+
+function applyFlightEdit() {
+    doc.getElementById("mainTab").firstElementChild.innerHTML = responseObject["main"];
+    doc.getElementById("administratorTab").innerText = responseObject["administrator"];
+    doc.getElementById("sign").firstElementChild.innerText = responseObject["sign_out"];
+    doc.getElementById("content").lang = responseObject["lang"];
+
+    doc.getElementById("labelFlightNumber").innerText = responseObject["flight.edit.number"];
+    doc.getElementById("labelStartPoint").innerText = responseObject["flight.edit.from"];
+    doc.getElementById("labelDestinationPoint").innerText = responseObject["flight.edit.to"];
+    doc.getElementById("labelDepartureDate").innerText = responseObject["flight.edit.departure_date"];
+    doc.getElementById("labelDepartureTime").innerText = responseObject["flight.edit.departure_time"];
+    doc.getElementById("labelArrivalDate").innerText = responseObject["flight.edit.arrival_date"];
+    doc.getElementById("labelArrivalTime").innerText = responseObject["flight.edit.arrival_time"];
+    doc.getElementById("labelPlane").innerText = responseObject["flight.edit.plane"];
+
+    doc.getElementById("buttonSave").value = responseObject["flight.edit.save"];
+    doc.getElementById("buttonCancel").value = responseObject["flight.edit.cancel"];
+}
 
 // ---------- dispatcher.html ----------
 function localizeDispatcher() {
@@ -138,28 +177,90 @@ function applyLocaleDispatcher() {
     doc.getElementById("sign").firstElementChild.innerText = responseObject["sign_out"];
     doc.getElementById("content").lang = responseObject["lang"];
     doc.getElementById("tableCaption").innerText = responseObject["crews"];
-    var headElements = document.getElementById("hatRow").children;
-    headElements[1].innerHTML = responseObject["number"];
-    headElements[2].innerHTML = responseObject["from"];
-    headElements[3].innerHTML = responseObject["to"];
-    headElements[4].innerHTML = responseObject["departure_date"];
-    headElements[5].innerHTML = responseObject["departure_time"];
-    headElements[6].innerHTML = responseObject["arrival_date"];
-    headElements[7].innerHTML = responseObject["arrival_time"];
-    headElements[8].innerHTML = responseObject["plane"];
-    headElements[10].innerHTML = responseObject["crew"];
+    var headColumns = document.getElementById("hatRow").children;
+    headColumns[1].innerHTML = responseObject["number"];
+    headColumns[2].innerHTML = responseObject["from"];
+    headColumns[3].innerHTML = responseObject["to"];
+    headColumns[4].innerHTML = responseObject["departure_date"];
+    headColumns[5].innerHTML = responseObject["departure_time"];
+    headColumns[6].innerHTML = responseObject["arrival_date"];
+    headColumns[7].innerHTML = responseObject["arrival_time"];
+    headColumns[8].innerHTML = responseObject["plane"];
+    headColumns[10].innerHTML = responseObject["crew"];
     doc.getElementById("buttonEdit").value = responseObject["crew.edit"];
     doc.getElementById("buttonDelete").value = responseObject["crew.delete"];
 }
 
+// ---------- CrewEditServlet ----------
+function localizeCrewEdit() {
+    var requestArray = [
+        "lang",
+        "main",
+        "dispatcher",
+        "sign_out",
+        "crew.edit.crew_name",
+        "crew.edit.employee_list",
+        "crew.edit.employee_base",
+        "name",
+        "surname",
+        "position",
+        "pilot",
+        "navigator",
+        "communicator",
+        "stewardess",
+        "crew.edit.name",
+        "crew.edit.surname",
+        "crew.edit.position",
+        "crew.edit.remove_from_crew",
+        "crew.edit.engage_employee",
+        "crew.edit.add_to_crew",
+        "crew.edit.fire_employee",
+        "crew.edit.save",
+        "crew.edit.cancel"
+    ];
+    ajaxPost("locale", requestArray, applyCrewEdit);
+}
 
+function applyCrewEdit() {
+    doc.getElementById("mainTab").firstElementChild.innerHTML = responseObject["main"];
+    doc.getElementById("dispatcherTab").innerText = responseObject["dispatcher"];
+    doc.getElementById("sign").firstElementChild.innerText = responseObject["sign_out"];
+    doc.getElementById("content").lang = responseObject["lang"];
+    doc.getElementById("labelName").innerText = responseObject["crew.edit.crew_name"];
+    doc.getElementById("captionEmployeeList").innerText = responseObject["crew.edit.employee_list"];
+    doc.getElementById("captionEmployeeBase").innerText = responseObject["crew.edit.employee_base"];
+    var headEmployeeListColumns = doc.getElementById("hatEmployeeListRow").children;
+    headEmployeeListColumns[1].innerHTML = responseObject["name"];
+    headEmployeeListColumns[2].innerHTML = responseObject["surname"];
+    headEmployeeListColumns[4].innerHTML = responseObject["position"];
+    var headEmployeeBaseColumns = doc.getElementById("hatEmployeeBaseRow").children;
+    headEmployeeBaseColumns[1].innerHTML = responseObject["name"];
+    headEmployeeBaseColumns[2].innerHTML = responseObject["surname"];
+    headEmployeeBaseColumns[4].innerHTML = responseObject["position"];
+    doc.getElementById("labelNewEmployeeName").innerText = responseObject["crew.edit.name"];
+    doc.getElementById("labelNewEmployeeSurname").innerText = responseObject["crew.edit.surname"];
+    doc.getElementById("labelNewEmployeePosition").innerText = responseObject["crew.edit.position"];
+    doc.getElementById("buttonRemoveFromCrew").value = responseObject["crew.edit.remove_from_crew"];
+    doc.getElementById("buttonEngageEmployee").value = responseObject["crew.edit.engage_employee"];
+    doc.getElementById("buttonAddToCrew").value = responseObject["crew.edit.add_to_crew"];
+    doc.getElementById("buttonFireEmployee").value = responseObject["crew.edit.fire_employee"];
+    doc.getElementById("buttonSave").value = responseObject["crew.edit.save"];
+    doc.getElementById("buttonCancel").value = responseObject["crew.edit.cancel"];
+    var employeeListRows = doc.getElementById("employeeListBody").children;
+    for (var i = 0; i < employeeListRows.length; i++) {
+        employeeListRows[i].children[4].innerText = responseObject[employeeListRows[i].children[3].innerText.toLowerCase()];
+    }
+    var employeeBaseRows = doc.getElementById("employeeBaseBody").children;
+    for (var j = 0; j < employeeBaseRows.length; j++) {
+        employeeBaseRows[j].children[4].innerText = responseObject[employeeBaseRows[j].children[3].innerText.toLowerCase()];
+    }
 
-
-
-
-
-
-
+    var positionSelectOptions = doc.getElementById("newEmployeePosition").children;
+    for (var k = 0; k < positionSelectOptions.length; k++) {
+        var option = positionSelectOptions[k];
+        option.innerHTML = responseObject[positionSelectOptions[k].value.toLowerCase()];
+    }
+}
 
 // --------------------
 function ajaxPost(url, requestObject, callback) {
@@ -170,7 +271,22 @@ function ajaxPost(url, requestObject, callback) {
         if (this.readyState === 4 && this.status === 200) {
             responseObject = JSON.parse(xhr.responseText);
             callback();
+            selectActualLangOption();
         }
     };
     xhr.send(JSON.stringify(requestObject));
+}
+
+function selectActualLangOption() {
+    var lang = doc.getElementById("lang");
+    if ("default" === lang.value) {
+        var langOptions = lang.children;
+        for (var i = 1; i < langOptions.length; i++) {
+            if (langOptions[i].value === responseObject["locale"]) {
+                langOptions[i].selected = true;
+                return;
+            }
+        }
+        langOptions[0].selected = true;
+    }
 }

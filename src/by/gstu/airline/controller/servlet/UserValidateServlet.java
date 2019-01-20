@@ -9,8 +9,7 @@ import java.io.IOException;
 
 public class UserValidateServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("POST to UserValidateServlet");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession(false);
         resp.setContentType("text/plain; charset=UTF-8");
         String role = null;

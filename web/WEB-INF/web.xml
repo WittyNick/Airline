@@ -143,6 +143,8 @@
     <servlet-mapping>
         <servlet-name>localeServlet</servlet-name>
         <url-pattern>/locale</url-pattern>
+        <url-pattern>/administrator/locale</url-pattern>
+        <url-pattern>/dispatcher/crew/locale</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -152,6 +154,8 @@
     <servlet-mapping>
         <servlet-name>localeChangeServlet</servlet-name>
         <url-pattern>/locale/change</url-pattern>
+        <url-pattern>/administrator/locale/change</url-pattern>
+        <url-pattern>/dispatcher/crew/locale/change</url-pattern>
     </servlet-mapping>
 
     <!-- Filters -->

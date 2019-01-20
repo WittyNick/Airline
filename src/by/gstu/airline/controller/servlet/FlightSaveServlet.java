@@ -18,7 +18,7 @@ import java.util.Date;
 public class FlightSaveServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Service service = Service.INSTANCE;
         BufferedReader reader = req.getReader();
         String jsonFlight;

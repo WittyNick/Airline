@@ -56,3 +56,7 @@ select {
 #employeeBase th:nth-child(4), #employeeBase td:nth-child(4) {
     display: none;
 }
+
+#editElements {
+    padding-left: 10px;
+}

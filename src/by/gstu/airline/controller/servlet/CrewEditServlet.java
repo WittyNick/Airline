@@ -15,12 +15,13 @@ import java.util.List;
 public class CrewEditServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Service service = Service.INSTANCE;
         String contextPath = req.getContextPath();
         String favicon = contextPath + "/img/favicon.ico";
         String cssHeader = contextPath + "/css/header.css";
         String css = contextPath + "/css/crewEdit.css";
+        String localeJs = contextPath + "/js/locale.js";
         String js = contextPath + "/js/crewEdit.js";
         int flightId = Integer.parseInt(req.getParameter("flightId"));
         int crewId = Integer.parseInt(req.getParameter("crewId"));
@@ -56,6 +57,7 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<link rel=\"shortcut icon\" href=\"" + favicon + "\" type=\"image/x-icon\">");
         out.println("<link rel=\"stylesheet\" href=\"" + cssHeader + "\">");
         out.println("<link rel=\"stylesheet\" href=\"" + css + "\">");
+        out.println("<script src=\"" + localeJs + "\"></script>");
         out.println("<script src=\"" + js + "\"></script>");
         out.println("</head>");
         out.println("<body>");
@@ -64,10 +66,11 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<table id=\"header\">");
         out.println("<tr>");
         out.println("<td id=\"space\"></td>");
-        out.println("<td class=\"tab\"><a href=\"../..\">main</a></td>");
-        out.println("<td class=\"picketTab\">dispatcher</td>");
+        out.println("<td id=\"mainTab\" class=\"tab\"><a href=\"../..\">main</a></td>");
+        out.println("<td id=\"dispatcherTab\" class=\"picketTab\">dispatcher</td>");
         out.println("<td id=\"locale\">");
         out.println("<select id=\"lang\">");
+        out.println("<option value=\"default\">default</option>");
         out.println("<option value=\"en_US\">english</option>");
         out.println("<option value=\"ru_RU\">русский</option>");
         out.println("</select>");
@@ -80,12 +83,13 @@ public class CrewEditServlet extends HttpServlet {
 
         out.println("<input id=\"flightId\" type=\"hidden\" value=\"" + flightId + "\">");
         out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
-        out.println("<label for=\"name\">crew name:</label><br>");
+        out.println("<div id=\"editElements\">");
+        out.println("<label id=\"labelName\" for=\"name\">crew name:</label><br>");
         out.println("<input id=\"name\" type=\"text\" value=\"" + crewName + "\"><br>");
         out.println("<table id=\"employeeList\">");
-        out.println("<caption>Employee List</caption>");
+        out.println("<caption id=\"captionEmployeeList\">Employee List</caption>");
         out.println("<thead>");
-        out.println("<tr>");
+        out.println("<tr id=\"hatEmployeeListRow\">");
         out.println("<th>id</th>");
         out.println("<th>Name</th>");
         out.println("<th>Surname</th>");
@@ -102,33 +106,35 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<table>");
         out.println("<tr>");
         out.println("<td>");
-        out.println("<label for=\"newEmployeeName\">name:</label><br>");
+        out.println("<label id=\"labelNewEmployeeName\" for=\"newEmployeeName\">name:</label><br>");
         out.println("<input id=\"newEmployeeName\" type=\"text\" value=\"\">");
         out.println("</td>");
         out.println("<td>");
-        out.println("<label for=\"newEmployeeSurname\">surname:</label><br>");
+        out.println("<label id=\"labelNewEmployeeSurname\" for=\"newEmployeeSurname\">surname:</label><br>");
         out.println("<input id=\"newEmployeeSurname\" type=\"text\">");
         out.println("</td>");
         out.println("<td>");
-        out.println("<label for=\"newEmployeePosition\">position:</label><br>");
+        out.println("<label id=\"labelNewEmployeePosition\" for=\"newEmployeePosition\">position:</label><br>");
+
         out.println("<select id=\"newEmployeePosition\">");
         out.println("<option value=\"PILOT\">pilot</option>");
         out.println("<option value=\"NAVIGATOR\">navigator</option>");
         out.println("<option value=\"COMMUNICATOR\">communicator</option>");
         out.println("<option value=\"STEWARDESS\">stewardess</option>");
+
         out.println("</select>");
         out.println("</td>");
         out.println("<td>");
         out.println("<br>");
-        out.println("<input id=\"engageEmployee\" type=\"button\" value=\"Engage Employee\" onclick=\"engageEmployeeAction()\">");
+        out.println("<input id=\"buttonEngageEmployee\" type=\"button\" value=\"Engage Employee\" onclick=\"engageEmployeeAction()\">");
         out.println("</td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("</form>");
         out.println("<table id=\"employeeBase\">");
-        out.println("<caption>Employee Base</caption>");
+        out.println("<caption id=\"captionEmployeeBase\">Employee Base</caption>");
         out.println("<thead>");
-        out.println("<tr>");
+        out.println("<tr id=\"hatEmployeeBaseRow\">");
         out.println("<th>id</th>");
         out.println("<th>Name</th>");
         out.println("<th>Surname</th>");
@@ -141,10 +147,11 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</tbody>");
         out.println("</table>");
         out.println("<input id=\"buttonAddToCrew\" type=\"button\" value=\"Add to Crew\" onclick=\"addToCrewAction()\">");
-        out.println("<input id=\"fireEmployee\" type=\"button\" value=\"Fire Employee\" onclick=\"fireEmployeeAction()\"><br>");
+        out.println("<input id=\"buttonFireEmployee\" type=\"button\" value=\"Fire Employee\" onclick=\"fireEmployeeAction()\"><br>");
+        out.println("</div>");
         out.println("<div id=\"buttons\">");
-        out.println("<input id=\"Save\" type=\"button\" value=\"Save\" onclick=\"saveAction()\">");
-        out.println("<input id=\"Cancel\" type=\"button\" value=\"Cancel\" onclick=\"cancelAction()\">");
+        out.println("<input id=\"buttonSave\" type=\"button\" value=\"Save\" onclick=\"saveAction()\">");
+        out.println("<input id=\"buttonCancel\" type=\"button\" value=\"Cancel\" onclick=\"cancelAction()\">");
         out.println("</div>");
         out.println("</div>");
         out.println("</body>");
