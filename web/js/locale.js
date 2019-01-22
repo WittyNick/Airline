@@ -1,4 +1,5 @@
 var responseObject;
+var messages;
 
 // ---------- welcome.html ----------
 function localizeWelcome() {
@@ -19,7 +20,7 @@ function localizeWelcome() {
         "arrival_time",
         "plane"
     ];
-    ajaxPost("locale", requestArray, applyLocaleWelcome);
+    ajaxPost(requestArray, applyLocaleWelcome);
 }
 
 function applyLocaleWelcome() {
@@ -49,9 +50,12 @@ function localizeSignIn() {
         "login",
         "password",
         "enter",
-        "cancel"
+        "cancel",
+        "message.sign_in.login",
+        "message.sign_in.password",
+        "message.sign_in.fail"
     ];
-    ajaxPost("locale", requestArray, applyLocaleSignIn);
+    ajaxPost(requestArray, applyLocaleSignIn);
 }
 
 function applyLocaleSignIn() {
@@ -61,7 +65,23 @@ function applyLocaleSignIn() {
     doc.getElementById("labelPassword").innerText = responseObject["password"];
     doc.getElementById("buttonSubmit").value = responseObject["enter"];
     doc.getElementById("buttonCancel").value = responseObject["cancel"];
+
+    messages = [
+        "",
+        responseObject["message.sign_in.login"],
+        responseObject["message.sign_in.password"],
+        responseObject["message.sign_in.fail"]
+    ];
+    setMessages();
+    doc.getElementById("messageFail").innerHTML = messages[3];
 }
+
+
+
+
+
+
+
 
 // ---------- administrator.html ----------
 function localizeAdministrator() {
@@ -84,7 +104,7 @@ function localizeAdministrator() {
         "flight.add",
         "flight.delete"
     ];
-    ajaxPost("locale", requestArray, applyLocaleAdministrator);
+    ajaxPost(requestArray, applyLocaleAdministrator);
 }
 
 function applyLocaleAdministrator() {
@@ -109,7 +129,7 @@ function applyLocaleAdministrator() {
 }
 
 // ---------- FlightEditServlet ----------
-function localizeFligntEdit() {
+function localizeFlightEdit() {
     var requestArray = [
         "lang",
         "main",
@@ -124,9 +144,12 @@ function localizeFligntEdit() {
         "flight.edit.arrival_time",
         "flight.edit.plane",
         "flight.edit.save",
-        "flight.edit.cancel"
+        "flight.edit.cancel",
+        "message.flight.edit.fill_field",
+        "message.flight.edit.illegal_value",
+        "message.flight.edit.fill_date_time"
     ];
-    ajaxPost("locale", requestArray, applyFlightEdit);
+    ajaxPost(requestArray, applyFlightEdit);
 }
 
 function applyFlightEdit() {
@@ -143,10 +166,27 @@ function applyFlightEdit() {
     doc.getElementById("labelArrivalDate").innerText = responseObject["flight.edit.arrival_date"];
     doc.getElementById("labelArrivalTime").innerText = responseObject["flight.edit.arrival_time"];
     doc.getElementById("labelPlane").innerText = responseObject["flight.edit.plane"];
-
     doc.getElementById("buttonSave").value = responseObject["flight.edit.save"];
     doc.getElementById("buttonCancel").value = responseObject["flight.edit.cancel"];
+
+    messages = [
+        "",
+        responseObject["message.flight.edit.fill_field"],
+        responseObject["message.flight.edit.illegal_value"],
+        responseObject["message.flight.edit.fill_date_time"]
+    ];
+    setMessages();
 }
+
+
+
+
+
+
+
+
+
+
 
 // ---------- dispatcher.html ----------
 function localizeDispatcher() {
@@ -168,7 +208,7 @@ function localizeDispatcher() {
         "crew.edit",
         "crew.delete"
     ];
-    ajaxPost("locale", requestArray, applyLocaleDispatcher);
+    ajaxPost(requestArray, applyLocaleDispatcher);
 }
 
 function applyLocaleDispatcher() {
@@ -218,7 +258,7 @@ function localizeCrewEdit() {
         "crew.edit.save",
         "crew.edit.cancel"
     ];
-    ajaxPost("locale", requestArray, applyCrewEdit);
+    ajaxPost(requestArray, applyCrewEdit);
 }
 
 function applyCrewEdit() {
@@ -254,7 +294,6 @@ function applyCrewEdit() {
     for (var j = 0; j < employeeBaseRows.length; j++) {
         employeeBaseRows[j].children[4].innerText = responseObject[employeeBaseRows[j].children[3].innerText.toLowerCase()];
     }
-
     var positionSelectOptions = doc.getElementById("newEmployeePosition").children;
     for (var k = 0; k < positionSelectOptions.length; k++) {
         var option = positionSelectOptions[k];
@@ -263,9 +302,9 @@ function applyCrewEdit() {
 }
 
 // --------------------
-function ajaxPost(url, requestObject, callback) {
+function ajaxPost(requestObject, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    xhr.open("POST", "locale", true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {

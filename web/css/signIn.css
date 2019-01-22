@@ -19,3 +19,16 @@
     margin-top: 10px;
     margin-right: 4px;
 }
+
+.hidden {
+    display: none;
+}
+
+.message {
+    color: #ff0000;
+    font-style: oblique;
+}
+
+#fieldsetLogIn span {
+    margin-left: 3px;
+}

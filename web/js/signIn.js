@@ -29,10 +29,15 @@ dispatcher - переход на страницу dispatcher.html через Dis
 user - остаемся на странице signIn.html, очищаем поля ввода.
  */
 function buttonSubmitAction() {
-    var inputName = doc.getElementById("login");
+    var messageFail = doc.getElementById("messageFail");
+    messageFail.classList.add("hidden");
+    if (!isValid()) {
+        return;
+    }
+    var inputLogin = doc.getElementById("login");
     var inputPassword = doc.getElementById("password");
     var xhr = new XMLHttpRequest();
-    var body = "login=" + encodeURIComponent(inputName.value) +
+    var body = "login=" + encodeURIComponent(inputLogin.value) +
             "&password=" + encodeURIComponent(inputPassword.value);
     xhr.open("POST", "signin", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
@@ -43,10 +48,42 @@ function buttonSubmitAction() {
             } else if ("dispatcher" === this.responseText) {
                 doc.location.href = "dispatcher";
             } else {
-                inputName.value = "";
+                inputLogin.focus();
+                inputLogin.select();
                 inputPassword.value = "";
+                messageFail.classList.remove("hidden");
             }
         }
     };
     xhr.send(body);
+}
+
+var messagePasswordIndex = 0;
+var messageLoginIndex = 0;
+
+function isValid() {
+    var valid = true;
+    var inputLogin = doc.getElementById("login");
+    var inputPassword = doc.getElementById("password");
+    if (!inputPassword.value) {
+        messagePasswordIndex = 1;
+        inputPassword.focus();
+        valid = false;
+    } else {
+        messagePasswordIndex = 0;
+    }
+    if (!inputLogin.value.trim()) {
+        messageLoginIndex = 2;
+        inputLogin.select();
+        valid = false;
+    } else {
+        messageLoginIndex = 0;
+    }
+    setMessages();
+    return valid;
+}
+
+function setMessages() {
+    doc.getElementById("messagePassword").innerText = messages[messagePasswordIndex];
+    doc.getElementById("messageLogin").innerText = messages[messageLoginIndex];
 }
