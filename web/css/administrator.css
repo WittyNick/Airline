@@ -1,3 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../img/bg.png);
+}
+
+html, body {
+    height: 100%;
+}
+
 #mainTable {
     margin-top: 10px;
     margin-left: auto;
@@ -37,6 +50,8 @@ input[type="button"] {
     width: 960px;
     margin-left: auto;
     margin-right: auto;
+    background: #ffffff;
+    min-height: 100%;
 }
 
 #mainTable th:nth-child(1), #mainTable tr td:nth-child(1),

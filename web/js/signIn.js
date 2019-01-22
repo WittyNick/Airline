@@ -66,14 +66,14 @@ function isValid() {
     var inputLogin = doc.getElementById("login");
     var inputPassword = doc.getElementById("password");
     if (!inputPassword.value) {
-        messagePasswordIndex = 1;
+        messagePasswordIndex = 2;
         inputPassword.focus();
         valid = false;
     } else {
         messagePasswordIndex = 0;
     }
     if (!inputLogin.value.trim()) {
-        messageLoginIndex = 2;
+        messageLoginIndex = 1;
         inputLogin.select();
         valid = false;
     } else {

@@ -69,6 +69,7 @@ public class FlightEditServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<div id=\"content\">");
+        out.println("<div id=\"empty\"></div>");
 
         out.println("<table id=\"header\">");
         out.println("<tr>");

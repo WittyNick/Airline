@@ -5,6 +5,10 @@
     border-collapse: collapse;
 }
 
+#empty {
+    height: 8px;
+}
+
 #header td:not(.picketTab) {
     border-bottom: 2px solid;
 }
