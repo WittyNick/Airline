@@ -29,8 +29,6 @@ dispatcher - переход на страницу dispatcher.html через Dis
 user - остаемся на странице signIn.html, очищаем поля ввода.
  */
 function buttonSubmitAction() {
-    var messageFail = doc.getElementById("messageFail");
-    messageFail.classList.add("hidden");
     if (!isValid()) {
         return;
     }
@@ -48,10 +46,10 @@ function buttonSubmitAction() {
             } else if ("dispatcher" === this.responseText) {
                 doc.location.href = "dispatcher";
             } else {
-                inputLogin.focus();
-                inputLogin.select();
                 inputPassword.value = "";
-                messageFail.classList.remove("hidden");
+                inputLogin.select();
+                messageFailIndex = 3;
+                doc.getElementById("messageFail").innerText = messages[messageFailIndex];
             }
         }
     };
@@ -60,6 +58,7 @@ function buttonSubmitAction() {
 
 var messagePasswordIndex = 0;
 var messageLoginIndex = 0;
+var messageFailIndex = 0;
 
 function isValid() {
     var valid = true;
@@ -79,6 +78,7 @@ function isValid() {
     } else {
         messageLoginIndex = 0;
     }
+    messageFailIndex = 0;
     setMessages();
     return valid;
 }
@@ -86,4 +86,5 @@ function isValid() {
 function setMessages() {
     doc.getElementById("messagePassword").innerText = messages[messagePasswordIndex];
     doc.getElementById("messageLogin").innerText = messages[messageLoginIndex];
+    doc.getElementById("messageFail").innerText = messages[messageFailIndex];
 }

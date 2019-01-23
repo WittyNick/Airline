@@ -1,7 +1,3 @@
-body {
-    background-image: url(../img/bg.png);
-}
-
 html, body {
     height: 100%;
     margin: 0;
@@ -19,6 +15,19 @@ html, body {
     padding: 3px;
 }
 
+#content input[type="text"] {
+    margin-bottom: 8px;
+}
+
+#content input[type="password"] {
+    margin-bottom: 5px;
+}
+
+#content input[type="button"] {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
 #fieldsetLogIn {
     width: 300px;
     margin-top: 50px;
@@ -27,12 +36,7 @@ html, body {
 }
 
 #buttonSubmit {
-    margin-top: 10px;
-    margin-right: 4px;
-}
-
-.hidden {
-    display: none;
+    margin-right: 5px;
 }
 
 .message {

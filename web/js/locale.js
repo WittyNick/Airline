@@ -73,15 +73,7 @@ function applyLocaleSignIn() {
         responseObject["message.sign_in.fail"]
     ];
     setMessages();
-    doc.getElementById("messageFail").innerHTML = messages[3];
 }
-
-
-
-
-
-
-
 
 // ---------- administrator.html ----------
 function localizeAdministrator() {
@@ -102,7 +94,8 @@ function localizeAdministrator() {
         "crew",
         "flight.edit",
         "flight.add",
-        "flight.delete"
+        "flight.delete",
+        "flight.confirm.delete"
     ];
     ajaxPost(requestArray, applyLocaleAdministrator);
 }
@@ -178,16 +171,6 @@ function applyFlightEdit() {
     setMessages();
 }
 
-
-
-
-
-
-
-
-
-
-
 // ---------- dispatcher.html ----------
 function localizeDispatcher() {
     var requestArray = [
@@ -206,7 +189,8 @@ function localizeDispatcher() {
         "plane",
         "crew",
         "crew.edit",
-        "crew.delete"
+        "crew.delete",
+        "crew.confirm.delete"
     ];
     ajaxPost(requestArray, applyLocaleDispatcher);
 }
@@ -256,7 +240,12 @@ function localizeCrewEdit() {
         "crew.edit.add_to_crew",
         "crew.edit.fire_employee",
         "crew.edit.save",
-        "crew.edit.cancel"
+        "crew.edit.cancel",
+        "crew.edit.confirm.fire_employee",
+        "message.crew.edit.enter_crew_name",
+        "message.crew.edit.enter_employee_name",
+        "message.crew.edit.enter_employee_surname",
+        "message.crew.edit.enter_employee_name_and_surname"
     ];
     ajaxPost(requestArray, applyCrewEdit);
 }
@@ -299,6 +288,15 @@ function applyCrewEdit() {
         var option = positionSelectOptions[k];
         option.innerHTML = responseObject[positionSelectOptions[k].value.toLowerCase()];
     }
+
+    messages = [
+        "",
+        responseObject["message.crew.edit.enter_crew_name"],
+        responseObject["message.crew.edit.enter_employee_name"],
+        responseObject["message.crew.edit.enter_employee_surname"],
+        responseObject["message.crew.edit.enter_employee_name_and_surname"]
+    ];
+    setMessages();
 }
 
 // --------------------

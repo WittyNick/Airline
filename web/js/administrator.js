@@ -49,6 +49,10 @@ function buttonDeleteAction() {
     if (tmpSelectedRow == null) {
         return;
     }
+    if (!confirm(responseObject["flight.confirm.delete"])) {
+        return;
+    }
+
     var selectedFlightArray = tmpSelectedRow.children;
     var flight = {
         "id": Number(selectedFlightArray[0].innerText),

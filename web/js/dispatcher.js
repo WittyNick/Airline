@@ -47,6 +47,10 @@ function buttonDeleteCrewAction() {
         return;
     }
     var selectedFlightArray = tmpSelectedRow.children;
+    var crewId = Number(selectedFlightArray[9].innerText);
+    if (crewId !== 0 && !confirm(responseObject["crew.confirm.delete"])) {
+        return;
+    }
     var flight = {
         "id": Number(selectedFlightArray[0].innerText),
         "flightNumber": Number(selectedFlightArray[1].innerText),
@@ -58,7 +62,7 @@ function buttonDeleteCrewAction() {
         "arrivalTime": selectedFlightArray[7].innerText,
         "plane": selectedFlightArray[8].innerText,
         "crew": {
-            "id": Number(selectedFlightArray[9].innerText)
+            "id": crewId
         }
     };
 

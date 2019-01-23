@@ -86,7 +86,10 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
         out.println("<div id=\"editElements\">");
         out.println("<label id=\"labelName\" for=\"name\">crew name:</label><br>");
-        out.println("<input id=\"name\" type=\"text\" value=\"" + crewName + "\"><br>");
+        out.println("<input id=\"name\" type=\"text\" value=\"" + crewName + "\">");
+
+        out.println("<span id=\"messageName\" class=\"message\"></span>");
+
         out.println("<table id=\"employeeList\">");
         out.println("<caption id=\"captionEmployeeList\">Employee List</caption>");
         out.println("<thead>");
@@ -103,8 +106,8 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</tbody>");
         out.println("</table>");
         out.println("<input id=\"buttonRemoveFromCrew\" type=\"button\" value=\"Remove from Crew\" onclick=\"removeFromCrewAction()\">");
-        out.println("<form>");
-        out.println("<table>");
+
+        out.println("<table id=\"tableNewEmployee\">");
         out.println("<tr>");
         out.println("<td>");
         out.println("<label id=\"labelNewEmployeeName\" for=\"newEmployeeName\">name:</label><br>");
@@ -116,13 +119,11 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</td>");
         out.println("<td>");
         out.println("<label id=\"labelNewEmployeePosition\" for=\"newEmployeePosition\">position:</label><br>");
-
         out.println("<select id=\"newEmployeePosition\">");
         out.println("<option value=\"PILOT\">pilot</option>");
         out.println("<option value=\"NAVIGATOR\">navigator</option>");
         out.println("<option value=\"COMMUNICATOR\">communicator</option>");
         out.println("<option value=\"STEWARDESS\">stewardess</option>");
-
         out.println("</select>");
         out.println("</td>");
         out.println("<td>");
@@ -131,7 +132,9 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</td>");
         out.println("</tr>");
         out.println("</table>");
-        out.println("</form>");
+
+        out.println("<div id=\"messageNewEmployee\" class=\"message\"></div>");
+
         out.println("<table id=\"employeeBase\">");
         out.println("<caption id=\"captionEmployeeBase\">Employee Base</caption>");
         out.println("<thead>");

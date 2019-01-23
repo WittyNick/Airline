@@ -88,6 +88,9 @@ function addToCrewAction() {
 }
 
 function engageEmployeeAction() {
+    if (!isValidAddEmployee()) {
+        return;
+    }
     var inputNewEmployeeName = doc.getElementById("newEmployeeName");
     var inputNewEmployeeSurname = doc.getElementById("newEmployeeSurname");
     var employeeSend = {
@@ -132,7 +135,7 @@ function fireEmployeeAction() {
     if (tmpSelectedBaseRow == null) {
         return;
     }
-    if (!confirm("File Employee?")) {
+    if (!confirm(responseObject["crew.edit.confirm.fire_employee"])) {
         return;
     }
     var employeeChildren = tmpSelectedBaseRow.children;
@@ -158,6 +161,9 @@ function fireEmployeeAction() {
 }
 
 function saveAction() {
+    if (!isValidSave()) {
+        return;
+    }
     var bobtailFlight = {
         "id": doc.getElementById("flightId").value,
         "crew": {
@@ -204,4 +210,50 @@ function signOut() {
         }
     };
     xhr.send();
+}
+
+var messageCrewNameIndex = 0;
+var messageNewEmployeeIndex = 0;
+
+function isValidSave() {
+    var valid = true;
+    var inputName = doc.getElementById("name");
+    if (!inputName.value.trim()) {
+        messageCrewNameIndex = 1;
+        valid = false;
+    } else {
+        messageCrewNameIndex = 0;
+    }
+    setMessages();
+    return valid;
+}
+
+function isValidAddEmployee() {
+    var valid = true;
+    var inputNewEmployeeName = doc.getElementById("newEmployeeName");
+    var inputNewEmployeeSurname = doc.getElementById("newEmployeeSurname");
+    if (!inputNewEmployeeName.value.trim() && !inputNewEmployeeSurname.value.trim()) {
+        messageNewEmployeeIndex = 4;
+        valid = false;
+    } else {
+        if (!inputNewEmployeeName.value.trim()) {
+            messageNewEmployeeIndex = 2;
+            valid = false;
+        } else if (!inputNewEmployeeSurname.value.trim()) {
+            messageNewEmployeeIndex = 3;
+            valid = false;
+        } else {
+            messageNewEmployeeIndex = 0;
+        }
+    }
+    doc.getElementById("messageNewEmployee").innerText = messages[messageNewEmployeeIndex];
+    setTimeout(function() {
+        messageNewEmployeeIndex = 0;
+        doc.getElementById("messageNewEmployee").innerText = messages[messageNewEmployeeIndex];
+    }, 2000);
+    return valid;
+}
+
+function setMessages() {
+    doc.getElementById("messageName").innerText = messages[messageCrewNameIndex];
 }

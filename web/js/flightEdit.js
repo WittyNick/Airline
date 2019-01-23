@@ -65,17 +65,6 @@ function signOut() {
     xhr.send();
 }
 
-
-
-
-
-// messages = [
-//     "",
-//     "message.flight.edit.fill_field",
-//     "message.flight.edit.illegal_value",
-//     "message.flight.edit.fill_date_time"
-// ];
-
 var messageFlightNumberIndex = 0;
 var messageStartPointIndex = 0;
 var messageDestinationPointIndex = 0;
