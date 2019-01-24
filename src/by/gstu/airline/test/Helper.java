@@ -1,19 +1,20 @@
 package by.gstu.airline.test;
 
 import by.gstu.airline.config.ConfigurationManager;
-import by.gstu.airline.entity.*;
-import by.gstu.airline.service.Service;
-import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 public class Helper {
+    private static Logger LOGGER = LogManager.getLogger(Helper.class);
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
     public static void main(String[] args) {
+        LOGGER.trace(" ");
+        LOGGER.warn(" ");
+
 //        System.out.println(new Locale("ru", "RU"));
 //        createDatabase("airlineLite");
 //        resetTables();
@@ -21,7 +22,7 @@ public class Helper {
     }
 
     private static void test() {
-        Service service = Service.INSTANCE;
+//        Service service = Service.INSTANCE;
         Locale ru = new Locale("ru", "RU");
         manager.changeLocale(ru);
 

@@ -10,6 +10,8 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="gson-2.8.5" />
           <element id="library" level="project" name="mysql-connector-java-8.0.12" />
+          <element id="library" level="project" name="log4j-api-2.11.1" />
+          <element id="library" level="project" name="log4j-core-2.11.1" />
         </element>
       </element>
     </root>
