@@ -8,13 +8,9 @@ import java.sql.*;
 import java.util.Locale;
 
 public class Helper {
-    private static Logger LOGGER = LogManager.getLogger(Helper.class);
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
     public static void main(String[] args) {
-        LOGGER.trace(" ");
-        LOGGER.warn(" ");
-
 //        System.out.println(new Locale("ru", "RU"));
 //        createDatabase("airlineLite");
 //        resetTables();

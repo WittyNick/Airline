@@ -54,7 +54,6 @@ public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
         statement.setInt(1, entity.getId());
     }
 
-    // employeeList может быть пустым, тогда должен быть null
     @Override
     protected List<Crew> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Crew> list = new ArrayList<>();

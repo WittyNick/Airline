@@ -5,6 +5,8 @@ import by.gstu.airline.dao.jdbc.connection.ProxyConnection;
 import by.gstu.airline.entity.Crew;
 import by.gstu.airline.entity.Employee;
 import by.gstu.airline.entity.Member;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
+    private static final Logger LOG = LogManager.getLogger(MemberDaoJdbc.class);
 
     @Override
     protected String getCreateQuery() {
@@ -74,11 +77,11 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
             connection = connectionPool.getConnection();
             statement = connection.prepareStatement(sql);
             statement.setInt(1, crewId);
-            if (statement.executeUpdate() >= 1) {
-//                System.out.println("deleted successfully");
+            if (statement.executeUpdate() > 0) {
+                LOG.trace("crew deleted successfully");
             }
         } catch (SQLException | InterruptedException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             close(connection, statement);
         }

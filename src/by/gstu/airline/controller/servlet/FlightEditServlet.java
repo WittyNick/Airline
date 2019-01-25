@@ -3,6 +3,8 @@ package by.gstu.airline.controller.servlet;
 import by.gstu.airline.config.ConfigurationManager;
 import by.gstu.airline.entity.Flight;
 import by.gstu.airline.service.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlightEditServlet extends HttpServlet {
+    private static final Logger LOG = LogManager.getLogger(FlightEditServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -148,29 +151,24 @@ public class FlightEditServlet extends HttpServlet {
     }
 
     private String convertDate(String dateString) {
-        ConfigurationManager manager = ConfigurationManager.INSTANCE;
-        SimpleDateFormat fromString = new SimpleDateFormat(manager.getText("date.format"));
-        SimpleDateFormat toString = new SimpleDateFormat("yyyy-MM-dd");
-        String result = "";
-        try {
-            Date date = fromString.parse(dateString);
-            result = toString.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return convert(dateString, "date.format", "yyyy-MM-dd");
     }
 
     private String convertTime(String timeString) {
+        return convert(timeString, "time.format", "HH:mm");
+    }
+
+
+    private String convert(String data, String fromPatternProperty, String toPattern) {
         ConfigurationManager manager = ConfigurationManager.INSTANCE;
-        SimpleDateFormat fromString = new SimpleDateFormat(manager.getText("time.format"));
-        SimpleDateFormat toString = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat fromString = new SimpleDateFormat(manager.getText(fromPatternProperty));
+        SimpleDateFormat toString = new SimpleDateFormat(toPattern);
         String result = "";
         try {
-            Date date = fromString.parse(timeString);
+            Date date = fromString.parse(data);
             result = toString.format(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return result;
     }

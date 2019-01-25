@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
-        <File name="FileAppender" fileName="log/log.txt" append="true">
-            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
-        </File>
+        <RollingFile name="FileAppender" fileName="log/log.txt" filePattern="log/log_%d{yyyy-MM-dd}-%i.txt">
+            <LevelRangeFilter minLevel="FATAL" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="by.gstu" level="debug">
-            <AppenderRef ref="FileAppender"/>
+        <Logger name="by.gstu.airline" level="DEBUG" additivity="true">
+            <AppenderRef ref="FileAppender" />
         </Logger>
-        <Root level="debug">
-            <AppenderRef ref="ConsoleAppender"/>
+        <Root level="ALL">
+            <AppenderRef ref="ConsoleAppender" />
         </Root>
     </Loggers>
 </Configuration>

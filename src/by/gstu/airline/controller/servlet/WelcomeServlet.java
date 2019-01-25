@@ -3,7 +3,6 @@ package by.gstu.airline.controller.servlet;
 import by.gstu.airline.service.Service;
 import com.google.gson.Gson;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

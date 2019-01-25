@@ -6,6 +6,8 @@ import by.gstu.airline.entity.Crew;
 import by.gstu.airline.entity.Flight;
 import by.gstu.airline.entity.Member;
 import by.gstu.airline.entity.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public enum Service {
     INSTANCE;
+    private static final Logger LOG = LogManager.getLogger(Service.class);
     private EmployeeDao employeeDao;
     private CrewDao crewDao;
     private MemberDao memberDao;
@@ -109,14 +112,13 @@ public enum Service {
             public int compare(Flight flight1, Flight flight2) {
                 String pattern = manager.getText("date.format") + ' ' + manager.getText("time.format");
                 SimpleDateFormat format = new SimpleDateFormat(pattern);
-
                 Date date1 = null;
                 Date date2 = null;
                 try {
                     date1 = format.parse(flight1.getDepartureDate() + ' ' + flight1.getDepartureTime());
                     date2 = format.parse(flight2.getDepartureDate() + ' ' + flight2.getDepartureTime());
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    LOG.error(e);
                 }
                 if (date1 == null || date2 == null) {
                     return 0;
@@ -131,11 +133,8 @@ public enum Service {
         if (flight.getCrew() != null && flight.getCrew().getId() > 0) {
             deleteMemberByCrewId(flight.getCrew().getId());
         }
-
-        // удалить бригаду
         delete(flight.getCrew());
 
-        // удалить рейс
         flightDao.delete(flight);
     }
 

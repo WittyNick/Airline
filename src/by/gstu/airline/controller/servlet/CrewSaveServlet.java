@@ -31,15 +31,6 @@ public class CrewSaveServlet extends HttpServlet {
             service.create(bobtailFlight.getCrew());
             Flight flight = service.readFlightById(bobtailFlight.getId());
             flight.setCrew(bobtailFlight.getCrew());
-
-
-
-
-
-
-
-
-
             service.update(flight);
         }
         service.update(bobtailFlight.getCrew());

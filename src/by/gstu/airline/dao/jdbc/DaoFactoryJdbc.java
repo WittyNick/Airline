@@ -3,10 +3,13 @@ package by.gstu.airline.dao.jdbc;
 import by.gstu.airline.config.ConfigurationManager;
 import by.gstu.airline.dao.*;
 import by.gstu.airline.dao.jdbc.connection.ProxyConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
 public class DaoFactoryJdbc extends DaoFactory {
+    private static final Logger LOG = LogManager.getLogger(DaoFactoryJdbc.class);
     private static DaoFactoryJdbc instance;
     private static ProxyConnectionPool proxyConnectionPool;
     private static ConfigurationManager manager = ConfigurationManager.INSTANCE;
@@ -47,7 +50,7 @@ public class DaoFactoryJdbc extends DaoFactory {
             try {
                 proxyConnectionPool = new ProxyConnectionPool(poolSize);
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOG.error(e);
             }
         }
         return proxyConnectionPool;

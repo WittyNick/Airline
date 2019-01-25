@@ -1,11 +1,15 @@
 package by.gstu.airline.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public enum ConfigurationManager {
     INSTANCE;
+    private static final Logger LOG = LogManager.getLogger(ConfigurationManager.class);
     private final String localePropertyFile = "resource.locale";
     private final String sqlPropertyFile = "resource.sql";
     private final String databasePropertyFile = "resource.database";
@@ -24,15 +28,27 @@ public enum ConfigurationManager {
     }
 
     public String getText(String key) {
-        return convert(localeBundle.getString(key));
+        if (localeBundle.containsKey(key)) {
+            return convert(localeBundle.getString(key));
+        }
+        LOG.warn("missing property \"" + key + "\" in file: resource/locale.properties");
+        return "";
     }
 
     public String getQuery(String key) {
-        return sqlBundle.getString(key);
+        if (sqlBundle.containsKey(key)) {
+            return sqlBundle.getString(key);
+        }
+        LOG.error("missing property \"" + key + "\" in file: resource/sql.properties");
+        return "";
     }
 
     public String getProperty(String key) {
-        return databaseBundle.getString(key);
+        if (databaseBundle.containsKey(key)) {
+            return databaseBundle.getString(key);
+        }
+        LOG.error("missing property \"" + key + "\" in file: resource/database.properties");
+        return "";
     }
 
     private String convert(String text) {

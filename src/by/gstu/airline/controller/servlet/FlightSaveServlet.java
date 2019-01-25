@@ -4,6 +4,8 @@ import by.gstu.airline.config.ConfigurationManager;
 import by.gstu.airline.entity.Flight;
 import by.gstu.airline.service.Service;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlightSaveServlet extends HttpServlet {
+    private static final Logger LOG = LogManager.getLogger(FlightEditServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -36,7 +39,6 @@ public class FlightSaveServlet extends HttpServlet {
         String departureTime = convertTime(bobtailFlight.getDepartureTime());
         String arrivalDate = convertDate(bobtailFlight.getArrivalDate());
         String arrivalTime = convertTime(bobtailFlight.getArrivalTime());
-
         bobtailFlight.setDepartureDate(departureDate);
         bobtailFlight.setDepartureTime(departureTime);
         bobtailFlight.setArrivalDate(arrivalDate);
@@ -51,31 +53,24 @@ public class FlightSaveServlet extends HttpServlet {
     }
 
     private String convertDate(String dateString) {
-        ConfigurationManager manager = ConfigurationManager.INSTANCE;
-        SimpleDateFormat fromString = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat toString = new SimpleDateFormat(manager.getText("date.format"));
-        String result = "";
-        try {
-            Date date = fromString.parse(dateString);
-            result = toString.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return convert(dateString, "yyyy-MM-dd", "date.format");
     }
 
     private String convertTime(String timeString) {
+        return convert(timeString, "HH:mm", "time.format");
+    }
+
+    private String convert(String data, String fromPattern, String toPatternProperty) {
         ConfigurationManager manager = ConfigurationManager.INSTANCE;
-        SimpleDateFormat fromString = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat toString = new SimpleDateFormat(manager.getText("time.format"));
+        SimpleDateFormat fromString = new SimpleDateFormat(fromPattern);
+        SimpleDateFormat toString = new SimpleDateFormat(manager.getText(toPatternProperty));
         String result = "";
         try {
-            Date date = fromString.parse(timeString);
+            Date date = fromString.parse(data);
             result = toString.format(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return result;
     }
-
 }
