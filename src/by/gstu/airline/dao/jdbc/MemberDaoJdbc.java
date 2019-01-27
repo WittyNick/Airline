@@ -2,8 +2,6 @@ package by.gstu.airline.dao.jdbc;
 
 import by.gstu.airline.dao.MemberDao;
 import by.gstu.airline.dao.jdbc.connection.ProxyConnection;
-import by.gstu.airline.entity.Crew;
-import by.gstu.airline.entity.Employee;
 import by.gstu.airline.entity.Member;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

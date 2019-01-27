@@ -5,8 +5,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * The class allows read *.property files.
+ */
 public enum ConfigurationManager {
     INSTANCE;
     private static final Logger LOG = LogManager.getLogger(ConfigurationManager.class);
@@ -27,28 +31,48 @@ public enum ConfigurationManager {
         localeBundle = ResourceBundle.getBundle(localePropertyFile, locale);
     }
 
+    /**
+     * Read localized string by key from resource/locale.property file.
+     *
+     * @param key the key for the desired localized string
+     * @return localized string
+     */
     public String getText(String key) {
         if (localeBundle.containsKey(key)) {
             return convert(localeBundle.getString(key));
         }
-        LOG.warn("missing property \"" + key + "\" in file: resource/locale.properties");
+        LOG.error("missing property \"" + key + "\" in file: resource/locale.properties");
         return "";
     }
 
+    /**
+     * Read SQL query by key from resource/sql.properties file.
+     *
+     * @param key the key for the desired localized query
+     * @return SQL query string
+     */
     public String getQuery(String key) {
-        if (sqlBundle.containsKey(key)) {
+        try {
             return sqlBundle.getString(key);
+        } catch (MissingResourceException e) {
+            LOG.error("missing property \"" + key + "\" in file: resource/sql.properties", e);
+            throw e;
         }
-        LOG.error("missing property \"" + key + "\" in file: resource/sql.properties");
-        return "";
     }
 
+    /**
+     * Read database connection pframeters from resources/database.properties.
+     *
+     * @param key the key for the desired property
+     * @return database connection property
+     */
     public String getProperty(String key) {
-        if (databaseBundle.containsKey(key)) {
+        try {
             return databaseBundle.getString(key);
+        } catch (MissingResourceException e) {
+            LOG.error("missing property \"" + key + "\" in file: resource/database.properties", e);
+            throw e;
         }
-        LOG.error("missing property \"" + key + "\" in file: resource/database.properties");
-        return "";
     }
 
     private String convert(String text) {

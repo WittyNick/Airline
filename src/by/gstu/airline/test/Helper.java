@@ -1,12 +1,16 @@
 package by.gstu.airline.test;
 
 import by.gstu.airline.config.ConfigurationManager;
+import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.Locale;
+import java.util.*;
 
+/**
+ * The class that can be deleted. :-)
+ */
 public class Helper {
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
 
