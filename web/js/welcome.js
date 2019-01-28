@@ -1,9 +1,9 @@
 var doc = document;
 
 /*
-Отправляет POST запрос в сервлет.
-Получает массив JSON рейсов.
-Вызывает фукцию fillTable(json).
+Send a POST request to the servlet.
+Gets an array of JSON Flights.
+Calls the fillTable() function.
 */
 window.onload = function() {
     setUserPageView();

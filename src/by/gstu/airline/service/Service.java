@@ -16,6 +16,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The class provides CRUD methods of logic of interaction with database.
+ */
 public enum Service {
     INSTANCE;
     private static final Logger LOG = LogManager.getLogger(Service.class);

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class AdministratorServlet extends HttpServlet {
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("administrator.html").forward(req, resp);

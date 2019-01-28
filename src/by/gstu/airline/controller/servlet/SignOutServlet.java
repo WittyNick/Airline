@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Remove user's role from session.
+ */
 public class SignOutServlet extends HttpServlet {
 
     @Override

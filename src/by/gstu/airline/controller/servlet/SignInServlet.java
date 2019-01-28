@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * The class provides sign in page and check users login and password.
+ */
 public class SignInServlet extends HttpServlet {
 
     @Override
@@ -15,6 +18,11 @@ public class SignInServlet extends HttpServlet {
         req.getRequestDispatcher("signIn.html").forward(req, resp);
     }
 
+    /**
+     * Check user's login and password.
+     * Save user's role to session when user is administrator or dispatcher.
+     * Write to response user's role or fail when login or password is invalid.
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();

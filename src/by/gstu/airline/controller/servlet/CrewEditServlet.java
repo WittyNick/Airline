@@ -25,7 +25,6 @@ public class CrewEditServlet extends HttpServlet {
         String js = contextPath + "/js/crewEdit.js";
         int flightId = Integer.parseInt(req.getParameter("flightId"));
         int crewId = Integer.parseInt(req.getParameter("crewId"));
-
         String crewName = "";
         String employeeListHtml = "";
 
@@ -44,7 +43,6 @@ public class CrewEditServlet extends HttpServlet {
                 }
             }
         }
-
         String employeeBaseHtml = createTbodyEmployee(employeeBase);
 
         resp.setContentType("text/html; charset=UTF-8");
@@ -63,7 +61,6 @@ public class CrewEditServlet extends HttpServlet {
         out.println("<body>");
         out.println("<div id=\"content\">");
         out.println("<div id=\"empty\"></div>");
-
         out.println("<table id=\"header\">");
         out.println("<tr>");
         out.println("<td id=\"space\"></td>");
@@ -81,15 +78,12 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</td>");
         out.println("</tr>");
         out.println("</table>");
-
         out.println("<input id=\"flightId\" type=\"hidden\" value=\"" + flightId + "\">");
         out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
         out.println("<div id=\"editElements\">");
         out.println("<label id=\"labelName\" for=\"name\">crew name:</label><br>");
         out.println("<input id=\"name\" type=\"text\" value=\"" + crewName + "\">");
-
         out.println("<span id=\"messageName\" class=\"message\"></span>");
-
         out.println("<table id=\"employeeList\">");
         out.println("<caption id=\"captionEmployeeList\">Employee List</caption>");
         out.println("<thead>");
@@ -106,7 +100,6 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</tbody>");
         out.println("</table>");
         out.println("<input id=\"buttonRemoveFromCrew\" type=\"button\" value=\"Remove from Crew\" onclick=\"removeFromCrewAction()\">");
-
         out.println("<table id=\"tableNewEmployee\">");
         out.println("<tr>");
         out.println("<td>");
@@ -132,9 +125,7 @@ public class CrewEditServlet extends HttpServlet {
         out.println("</td>");
         out.println("</tr>");
         out.println("</table>");
-
         out.println("<div id=\"messageNewEmployee\" class=\"message\"></div>");
-
         out.println("<table id=\"employeeBase\">");
         out.println("<caption id=\"captionEmployeeBase\">Employee Base</caption>");
         out.println("<thead>");

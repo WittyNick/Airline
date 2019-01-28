@@ -1,5 +1,8 @@
 package by.gstu.airline.entity;
 
+/**
+ * The class is for binding by id Crew and Employee entities.
+ */
 public class Member {
     private int id;
     private int crewId;

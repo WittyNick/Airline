@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class provides CRUD methods for Crew object.
+ */
 public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
 
     @Override
@@ -54,6 +57,13 @@ public class CrewDaoJdbc extends GenericDaoJdbc<Crew> implements CrewDao {
         statement.setInt(1, entity.getId());
     }
 
+    /**
+     * Parse ResultSet object to get Crew entities.
+     *
+     * @param resultSet parsed ResultSet object
+     * @return ArrayList of Crew entities
+     * @throws SQLException when resultSent does not contains required value
+     */
     @Override
     protected List<Crew> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Crew> list = new ArrayList<>();

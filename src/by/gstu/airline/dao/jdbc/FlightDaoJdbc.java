@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The class provides CRUD methods for Flight object.
+ */
 public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
 
     @Override
@@ -78,6 +81,13 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
         statement.setInt(1, entity.getId());
     }
 
+    /**
+     * Parse ResultSet object to get Flight entities.
+     *
+     * @param resultSet parsed ResultSet object
+     * @return ArrayList of Flight entities
+     * @throws SQLException when resultSent does not contains required value
+     */
     @Override
     protected List<Flight> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Flight> list = new ArrayList<>();

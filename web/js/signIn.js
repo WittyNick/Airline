@@ -21,12 +21,12 @@ window.onload = function() {
 };
 
 /*
-Авторизация пользователя.
-ajax post запрос в сервлет LoginServlet.
-Получам из сервлета тип пользователя:
-administrator - переход на страницу administrator.html через AdministratorServlet,
-dispatcher - переход на страницу dispatcher.html через DispatcherServlet,
-user - остаемся на странице signIn.html, очищаем поля ввода.
+User Authorization
+ajax post request to LoginServlet.
+Get user type from servlet:
+administrator - go to the page administrator.html via AdministratorServlet;
+dispatcher - go to the dispatcher.html page via DispatcherServlet;
+user - stay on the signIn.html page, clear password input field.
  */
 function buttonSubmitAction() {
     if (!isValid()) {

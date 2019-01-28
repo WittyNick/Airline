@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class provides CRUD methods for Employee object.
+ */
 public class EmployeeDaoJdbc extends GenericDaoJdbc<Employee> implements EmployeeDao {
 
     @Override
@@ -52,6 +55,13 @@ public class EmployeeDaoJdbc extends GenericDaoJdbc<Employee> implements Employe
         statement.setInt(1, entity.getId());
     }
 
+    /**
+     * Parse ResultSet object to get Employee entities.
+     *
+     * @param resultSet parsed ResultSet object
+     * @return ArrayList of Employee entities
+     * @throws SQLException when resultSent does not contains required value
+     */
     @Override
     protected List<Employee> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Employee> list = new ArrayList<>();

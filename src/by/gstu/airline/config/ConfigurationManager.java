@@ -9,6 +9,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
+ * Singleton.
  * The class allows read *.property files.
  */
 public enum ConfigurationManager {

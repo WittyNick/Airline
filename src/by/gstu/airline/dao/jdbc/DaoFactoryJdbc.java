@@ -8,6 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
+/**
+ * Singleton.
+ * The class produces DAO entities.
+ */
 public class DaoFactoryJdbc extends DaoFactory {
     private static final Logger LOG = LogManager.getLogger(DaoFactoryJdbc.class);
     private static DaoFactoryJdbc instance;
@@ -37,6 +41,11 @@ public class DaoFactoryJdbc extends DaoFactory {
         return new MemberDaoJdbc();
     }
 
+    /**
+     * Returns instance of singleton DaoFactoryJdbc.
+     *
+     * @return instance of this class
+     */
     public static synchronized DaoFactory getDaoFactory() {
         if (instance == null) {
             instance = new DaoFactoryJdbc();
@@ -44,6 +53,11 @@ public class DaoFactoryJdbc extends DaoFactory {
         return instance;
     }
 
+    /**
+     * Creates new instance of ProxyConnectionPool.
+     *
+     * @return new instance of ProxyConnectionPool
+     */
     static ProxyConnectionPool getProxyConnectionPool() {
         if (proxyConnectionPool == null) {
             int poolSize = Integer.parseInt(manager.getProperty("db.connection.pool.size"));

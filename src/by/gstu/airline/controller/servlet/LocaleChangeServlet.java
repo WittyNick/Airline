@@ -1,12 +1,11 @@
 package by.gstu.airline.controller.servlet;
 
-import by.gstu.airline.config.ConfigurationManager;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.Locale;
 
+/**
+ * The class changes Locale and save user's locale to session and cookies.
+ */
 public class LocaleChangeServlet extends HttpServlet {
 
     @Override
@@ -33,7 +32,7 @@ public class LocaleChangeServlet extends HttpServlet {
 
     private void saveToCookie(HttpServletResponse resp, String locale) {
         Cookie cookie = new Cookie("locale", locale);
-        cookie.setMaxAge(60 * 60);
+        cookie.setMaxAge(60 * 60); // 1 hour
         resp.addCookie(cookie);
     }
 }

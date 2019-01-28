@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class provides CRUD methods for Member object.
+ */
 public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
     private static final Logger LOG = LogManager.getLogger(MemberDaoJdbc.class);
 
@@ -53,6 +56,13 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
         statement.setInt(1, entity.getId());
     }
 
+    /**
+     * Parse ResultSet object to get Member entities.
+     *
+     * @param resultSet parsed ResultSet object
+     * @return ArrayList of Member objects
+     * @throws SQLException when resultSent does not contains required value
+     */
     @Override
     protected List<Member> parseResultSet(ResultSet resultSet) throws SQLException {
         List<Member> list = new ArrayList<>();
@@ -66,6 +76,11 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
         return list;
     }
 
+    /**
+     * Delete Member object from database by crew id.
+     *
+     * @param crewId Crew id to delete Member object
+     */
     @Override
     public void deleteByCrewId(int crewId) {
         String sql = manager.getQuery("member.delete.by.crew.id");

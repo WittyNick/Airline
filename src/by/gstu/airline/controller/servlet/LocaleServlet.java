@@ -3,7 +3,6 @@ package by.gstu.airline.controller.servlet;
 import by.gstu.airline.config.ConfigurationManager;
 import com.google.gson.Gson;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +10,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Find user's Locale in session and cookies and returns Map object
+ * that contains localized parameters.
+ * When user's session doesn't contains Locale information
+ * assume default locale from HttpServletRequest parameter.
+ */
 public class LocaleServlet extends HttpServlet {
 
     @Override
