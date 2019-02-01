@@ -36,42 +36,42 @@ public enum Service {
     }
 
     // Employee
-    public void create(Employee employee) {
+    public synchronized void create(Employee employee) {
         int id = employeeDao.create(employee);
         employee.setId(id);
     }
 
-    public Employee readEmployeeById(int id) {
+    public synchronized Employee readEmployeeById(int id) {
         return employeeDao.readById(id);
     }
 
-    public List<Employee> readAllEmployee() {
+    public synchronized List<Employee> readAllEmployee() {
         return employeeDao.readAll();
     }
 
-    public void update(Employee employee) {
+    public synchronized void update(Employee employee) {
         employeeDao.update(employee);
     }
 
-    public void delete(Employee employee) {
+    public synchronized void delete(Employee employee) {
         employeeDao.delete(employee);
     }
 
     // Crew
-    public void create(Crew crew) {
+    public synchronized void create(Crew crew) {
         int id = crewDao.create(crew);
         crew.setId(id);
     }
 
-    public List<Crew> readAllCrew() {
+    public synchronized List<Crew> readAllCrew() {
         return crewDao.readAll();
     }
 
-    public Crew readCrewById(int id) {
+    public synchronized Crew readCrewById(int id) {
         return crewDao.readById(id);
     }
 
-    public void update(Crew crew) {
+    public synchronized void update(Crew crew) {
         deleteMemberByCrewId(crew.getId());
         crewDao.update(crew);
         for (Employee employee : crew.getEmployeeList()) {
@@ -79,35 +79,35 @@ public enum Service {
         }
     }
 
-    public void delete(Crew crew) {
+    public synchronized void delete(Crew crew) {
         crewDao.delete(crew);
     }
 
     // Member
-    public void create(Member member) {
+    public synchronized void create(Member member) {
         int id = memberDao.create(member);
         member.setId(id);
     }
 
-    public void update(Member member) {
+    public synchronized void update(Member member) {
         memberDao.update(member);
     }
 
-    public void deleteMemberByCrewId(int crewId) {
+    public synchronized void deleteMemberByCrewId(int crewId) {
         memberDao.deleteByCrewId(crewId);
     }
 
     // Flight
-    public void create(Flight flight) {
+    public synchronized void create(Flight flight) {
         int id = flightDao.create(flight);
         flight.setId(id);
     }
 
-    public Flight readFlightById(int id) {
+    public synchronized Flight readFlightById(int id) {
         return flightDao.readById(id);
     }
 
-    public List<Flight> readAllFlight() {
+    public synchronized List<Flight> readAllFlight() {
         final ConfigurationManager manager = ConfigurationManager.INSTANCE;
         List<Flight> flightList = flightDao.readAll();
         Collections.sort(flightList, new Comparator<Flight>() {
@@ -132,7 +132,7 @@ public enum Service {
         return flightList;
     }
 
-    public void delete(Flight flight) {
+    public synchronized void delete(Flight flight) {
         if (flight.getCrew() != null && flight.getCrew().getId() > 0) {
             deleteMemberByCrewId(flight.getCrew().getId());
         }
@@ -141,7 +141,7 @@ public enum Service {
         flightDao.delete(flight);
     }
 
-    public void update(Flight flight) {
+    public synchronized void update(Flight flight) {
         flightDao.update(flight);
     }
 }
