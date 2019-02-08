@@ -21,7 +21,7 @@ import java.util.List;
  */
 public enum Service {
     INSTANCE;
-    private static final Logger LOG = LogManager.getLogger(Service.class);
+    private static final Logger log = LogManager.getLogger(Service.class);
     private EmployeeDao employeeDao;
     private CrewDao crewDao;
     private MemberDao memberDao;
@@ -121,7 +121,7 @@ public enum Service {
                     date1 = format.parse(flight1.getDepartureDate() + ' ' + flight1.getDepartureTime());
                     date2 = format.parse(flight2.getDepartureDate() + ' ' + flight2.getDepartureTime());
                 } catch (ParseException e) {
-                    LOG.error(e);
+                    log.error(e);
                 }
                 if (date1 == null || date2 == null) {
                     return 0;

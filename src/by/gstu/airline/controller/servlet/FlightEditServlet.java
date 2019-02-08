@@ -6,7 +6,6 @@ import by.gstu.airline.service.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlightEditServlet extends HttpServlet {
-    private static final Logger LOG = LogManager.getLogger(FlightEditServlet.class);
+    private static final Logger log = LogManager.getLogger(FlightEditServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -73,7 +72,6 @@ public class FlightEditServlet extends HttpServlet {
         out.println("<body>");
         out.println("<div id=\"content\">");
         out.println("<div id=\"empty\"></div>");
-
         out.println("<table id=\"header\">");
         out.println("<tr>");
         out.println("<td id=\"space\"></td>");
@@ -90,22 +88,18 @@ public class FlightEditServlet extends HttpServlet {
         out.println("</td>");
         out.println("</tr>");
         out.println("</table>");
-
         out.println("<form id=\"formMain\">");
         out.println("<input id=\"id\" type=\"hidden\" value=\"" + id + "\">");
         out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
         out.println("<label id=\"labelFlightNumber\" for=\"flightNumber\">flight number:</label><br>");
         out.println("<input id=\"flightNumber\" type=\"text\" value=\"" + flightNumber + "\">");  // flightNumber
         out.println("<span id=\"messageFlightNumber\" class=\"message\"></span><br>");
-
         out.println("<label id=\"labelStartPoint\" for=\"startPoint\">from:</label><br>");
         out.println("<input id=\"startPoint\" type=\"text\" maxlength=\"30ch\" value=\"" + startPoint + "\">"); // startPoint
         out.println("<span id=\"messageStartPoint\" class=\"message\"></span><br>");
-
         out.println("<label id=\"labelDestinationPoint\" for=\"destinationPoint\">to:</label><br>");
         out.println("<input id=\"destinationPoint\" type=\"text\" maxlength=\"30ch\" value=\"" + destinationPoint + "\">"); // destinationPoint
         out.println("<span id=\"messageDestinationPoint\" class=\"message\"></span>");
-
         out.println("<table>");
         out.println("<tr>");
         out.println("<td>");
@@ -120,13 +114,11 @@ public class FlightEditServlet extends HttpServlet {
         out.println("<br><span id=\"messageDepartureDateTime\" class=\"message\"></span>");
         out.println("</td>");
         out.println("</tr>");
-
         out.println("<tr>");
         out.println("<td>");
         out.println("<label id=\"labelArrivalDate\" for=\"arrivalDate\">arrival date:</label><br>\n");
         out.println("<input id=\"arrivalDate\" type=\"date\" value=\"" + arrivalDate + "\">"); // arrivalDate
         out.println("</td>");
-
         out.println("<td>");
         out.println("<label id=\"labelArrivalTime\" for=\"arrivalTime\">time:</label><br>");
         out.println("<input id=\"arrivalTime\" type=\"time\" value=\"" + arrivalTime + "\">"); // arrivalTime
@@ -134,14 +126,11 @@ public class FlightEditServlet extends HttpServlet {
         out.println("<td>");
         out.println("<br><span id=\"messageArrivalDateTime\" class=\"message\"></span>");
         out.println("</td>");
-
         out.println("</tr>");
         out.println("</table>");
-
         out.println("<label id=\"labelPlane\" for=\"plane\">plane:</label><br>\n");
         out.println("<input id=\"plane\" type=\"text\" maxlength=\"20ch\" value=\"" + plane + "\">"); // plane
         out.println("<span id=\"messagePlane\" class=\"message\"></span><br>");
-
         out.println("<input id=\"buttonSave\" type=\"button\" value=\"Save\" onclick=\"buttonSaveAction()\">");
         out.println("<input id=\"buttonCancel\" type=\"button\" value=\"Cancel\" onclick=\"buttonCancelAction()\">");
         out.println("</form>");
@@ -168,7 +157,7 @@ public class FlightEditServlet extends HttpServlet {
             Date date = fromString.parse(data);
             result = toString.format(date);
         } catch (ParseException e) {
-            LOG.error(e);
+            log.error(e);
         }
         return result;
     }

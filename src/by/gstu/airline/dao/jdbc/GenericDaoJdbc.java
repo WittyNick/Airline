@@ -19,7 +19,7 @@ import java.util.List;
  * @param <T> type of entity for CRUD operations
  */
 public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
-    private static final Logger LOG = LogManager.getLogger(ConfigurationManager.class);
+    private static final Logger log = LogManager.getLogger(ConfigurationManager.class);
     final ConfigurationManager manager = ConfigurationManager.INSTANCE;
     final ProxyConnectionPool connectionPool;
 
@@ -64,14 +64,14 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             prepareStatementForCreate(statement, entity);
             if (statement.executeUpdate() == 1) {
-                LOG.trace("entity was created successfully");
+                log.trace("entity was created successfully");
                 ResultSet resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     id = resultSet.getInt(1);
                 }
             }
         } catch (SQLException | InterruptedException e) {
-            LOG.error(e);
+            log.error(e);
         } finally {
             close(connection, statement);
         }
@@ -120,10 +120,10 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             statement = connection.prepareStatement(sql);
             prepareStatementForUpdate(statement, entity);
             if (statement.executeUpdate() > 0) {
-                LOG.trace("entity was updated successfully");
+                log.trace("entity was updated successfully");
             }
         } catch (SQLException | InterruptedException e) {
-            LOG.error(e);
+            log.error(e);
         } finally {
             close(connection, statement);
         }
@@ -144,10 +144,10 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             statement = connection.prepareStatement(sql);
             prepareStatementForDelete(statement, entity);
             if (statement.executeUpdate() > 0) {
-                LOG.trace("entity was deleted successfully");
+                log.trace("entity was deleted successfully");
             }
         } catch (SQLException | InterruptedException e) {
-            LOG.error(e);
+            log.error(e);
         } finally {
             close(connection, statement);
         }
@@ -163,7 +163,7 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
             ResultSet resultSet = statement.executeQuery();
             list = parseResultSet(resultSet);
         } catch (SQLException | InterruptedException e) {
-            LOG.error(e);
+            log.error(e);
         } finally {
             close(connection, statement);
         }
@@ -185,7 +185,7 @@ public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
                 connectionPool.closeConnection(connection);
             }
         } catch (SQLException e) {
-            LOG.error(e);
+            log.error(e);
         }
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
  * The class provides CRUD methods for Member object.
  */
 public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
-    private static final Logger LOG = LogManager.getLogger(MemberDaoJdbc.class);
+    private static final Logger log = LogManager.getLogger(MemberDaoJdbc.class);
 
     @Override
     protected String getCreateQuery() {
@@ -91,10 +91,10 @@ public class MemberDaoJdbc extends GenericDaoJdbc<Member> implements MemberDao {
             statement = connection.prepareStatement(sql);
             statement.setInt(1, crewId);
             if (statement.executeUpdate() > 0) {
-                LOG.trace("crew deleted successfully");
+                log.trace("crew deleted successfully");
             }
         } catch (SQLException | InterruptedException e) {
-            LOG.error(e);
+            log.error(e);
         } finally {
             close(connection, statement);
         }

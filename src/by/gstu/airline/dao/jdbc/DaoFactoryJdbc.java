@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * The class produces DAO entities.
  */
 public class DaoFactoryJdbc extends DaoFactory {
-    private static final Logger LOG = LogManager.getLogger(DaoFactoryJdbc.class);
+    private static final Logger log = LogManager.getLogger(DaoFactoryJdbc.class);
     private static DaoFactoryJdbc instance;
     private static ProxyConnectionPool proxyConnectionPool;
     private static ConfigurationManager manager = ConfigurationManager.INSTANCE;
@@ -64,7 +64,7 @@ public class DaoFactoryJdbc extends DaoFactory {
             try {
                 proxyConnectionPool = new ProxyConnectionPool(poolSize);
             } catch (SQLException e) {
-                LOG.error(e);
+                log.error(e);
             }
         }
         return proxyConnectionPool;

@@ -11,10 +11,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * The class allows to create pool of
+ * The class allows to create pool of ProxyConnection
  */
 public class ProxyConnectionPool {
-    private static final Logger LOG = LogManager.getLogger(ProxyConnectionPool.class);
+    private static final Logger log = LogManager.getLogger(ProxyConnectionPool.class);
     private ConfigurationManager manager = ConfigurationManager.INSTANCE;
     private BlockingQueue<ProxyConnection> connectionQueue;
 
@@ -26,7 +26,7 @@ public class ProxyConnectionPool {
      */
     public ProxyConnectionPool(final int poolSize)  throws SQLException {
         if (poolSize < 1) {
-            LOG.warn("pool size less than 1");
+            log.warn("pool size less than 1");
         }
         int n = poolSize < 1 ? 1 : poolSize;
         connectionQueue = new ArrayBlockingQueue<>(n);
@@ -61,7 +61,7 @@ public class ProxyConnectionPool {
         try {
             Class.forName(manager.getProperty("db.driver"));
         } catch (ClassNotFoundException e) {
-            LOG.error(e);
+            log.error(e);
         }
         Connection connection = DriverManager.getConnection(manager.getProperty("db.url"),
                 manager.getProperty("db.user"), manager.getProperty("db.password"));

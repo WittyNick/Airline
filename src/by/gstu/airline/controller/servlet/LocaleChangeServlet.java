@@ -12,7 +12,6 @@ public class LocaleChangeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/plain; charset=UTF-8");
         String locale = req.getParameter("locale");
-
         if (locale != null) {
             if("default".equals(locale)) {
                 locale = resp.getLocale().toString();

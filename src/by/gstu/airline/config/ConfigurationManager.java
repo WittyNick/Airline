@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  */
 public enum ConfigurationManager {
     INSTANCE;
-    private static final Logger LOG = LogManager.getLogger(ConfigurationManager.class);
+    private static final Logger log = LogManager.getLogger(ConfigurationManager.class);
     private final String localePropertyFile = "resource.locale";
     private final String sqlPropertyFile = "resource.sql";
     private final String databasePropertyFile = "resource.database";
@@ -42,7 +42,7 @@ public enum ConfigurationManager {
         if (localeBundle.containsKey(key)) {
             return convert(localeBundle.getString(key));
         }
-        LOG.error("missing property \"" + key + "\" in file: resource/locale.properties");
+        log.error("missing property \"" + key + "\" in file: resource/locale.properties");
         return "";
     }
 
@@ -56,7 +56,7 @@ public enum ConfigurationManager {
         try {
             return sqlBundle.getString(key);
         } catch (MissingResourceException e) {
-            LOG.error("missing property \"" + key + "\" in file: resource/sql.properties", e);
+            log.error("missing property \"" + key + "\" in file: resource/sql.properties", e);
             throw e;
         }
     }
@@ -71,7 +71,7 @@ public enum ConfigurationManager {
         try {
             return databaseBundle.getString(key);
         } catch (MissingResourceException e) {
-            LOG.error("missing property \"" + key + "\" in file: resource/database.properties", e);
+            log.error("missing property \"" + key + "\" in file: resource/database.properties", e);
             throw e;
         }
     }

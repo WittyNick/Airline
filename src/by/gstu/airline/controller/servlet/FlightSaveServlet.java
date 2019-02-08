@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlightSaveServlet extends HttpServlet {
-    private static final Logger LOG = LogManager.getLogger(FlightEditServlet.class);
+    private static final Logger log = LogManager.getLogger(FlightEditServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -68,7 +68,7 @@ public class FlightSaveServlet extends HttpServlet {
             Date date = fromString.parse(data);
             result = toString.format(date);
         } catch (ParseException e) {
-            LOG.error(e);
+            log.error(e);
         }
         return result;
     }
