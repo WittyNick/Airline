@@ -150,7 +150,6 @@ function applyFlightEdit() {
     doc.getElementById("administratorTab").innerText = responseObject["administrator"];
     doc.getElementById("sign").firstElementChild.innerText = responseObject["sign_out"];
     doc.getElementById("content").lang = responseObject["lang"];
-
     doc.getElementById("labelFlightNumber").innerText = responseObject["flight.edit.number"];
     doc.getElementById("labelStartPoint").innerText = responseObject["flight.edit.from"];
     doc.getElementById("labelDestinationPoint").innerText = responseObject["flight.edit.to"];
