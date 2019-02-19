@@ -19,7 +19,7 @@ import java.util.List;
  * @param <T> type of entity for CRUD operations
  */
 public abstract class GenericDaoJdbc<T> implements GenericDao<T> {
-    private static final Logger log = LogManager.getLogger(ConfigurationManager.class);
+    private static final Logger log = LogManager.getLogger(GenericDaoJdbc.class);
     final ConfigurationManager manager = ConfigurationManager.INSTANCE;
     final ProxyConnectionPool connectionPool;
 

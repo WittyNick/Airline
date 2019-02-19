@@ -147,8 +147,38 @@ public class Helper {
     }
 
     // TRUNCATE TABLE employees;
+/*
+CREATE DATABASE airline;
 
-    //    ALTER DATABASE database_name
-    //    CHARACTER SET utf8mb4
-    //    COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE airline
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE airline;
+
+CREATE TABLE flights (
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+flightNumber INTEGER,
+startPoint VARCHAR(30),
+destinationPoint VARCHAR(30),
+departureDateTime LONG,
+arrivalDateTime LONG,
+plane VARCHAR(10),
+crew INTEGER);
+
+CREATE TABLE crews (
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(30));
+
+CREATE TABLE members (
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+crewId INTEGER,
+employeeId INTEGER);
+
+CREATE TABLE employees (
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(30),
+surname VARCHAR(30),
+position INTEGER);
+*/
 }

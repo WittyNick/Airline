@@ -14,9 +14,10 @@ import java.sql.SQLException;
  */
 public class DaoFactoryJdbc extends DaoFactory {
     private static final Logger log = LogManager.getLogger(DaoFactoryJdbc.class);
+    private static ConfigurationManager manager = ConfigurationManager.INSTANCE;
     private static DaoFactoryJdbc instance;
     private static ProxyConnectionPool proxyConnectionPool;
-    private static ConfigurationManager manager = ConfigurationManager.INSTANCE;
+
 
     private DaoFactoryJdbc() {
     }

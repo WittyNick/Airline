@@ -41,7 +41,7 @@ public class ProxyConnectionPool {
      * when connection will be returned to pool.
      *
      * @return connection from pool.
-     * @throws InterruptedException will be throws when thread waiting
+     * @throws InterruptedException will be thrown when thread waiting
      *          to get ProxyConnection is interrupted
      */
     public ProxyConnection getConnection() throws InterruptedException {
