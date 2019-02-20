@@ -1,8 +1,17 @@
 package by.gstu.airline.controller.servlet.util;
 
+/**
+ * Utility class.
+ * Contains methods for creation html pages templates.
+ */
 public class PageTemplate {
     private PageTemplate() {}
 
+    /**
+     * Creates template String for FlightEditServlet
+     *
+     * @return html page template String
+     */
     public static String getFlightEditTemplate() {
         return "<!DOCTYPE html>" +
         "<html lang=\"en\">" +
@@ -85,6 +94,11 @@ public class PageTemplate {
         "</html>";
     }
 
+    /**
+     * Creates template String for CrewEditServlet
+     *
+     * @return html page template String
+     */
     public static String getCrewEditTemplate() {
         return "<!DOCTYPE html>" +
         "<html lang=\"en\">" +

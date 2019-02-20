@@ -5,7 +5,8 @@ import by.gstu.airline.config.ConfigurationManager;
 import java.sql.*;
 
 /**
- * The class provides utility to work with database.
+ * The class provides methods to work with database.
+ * Excluded from artifact.
  */
 public class Helper {
     private static final ConfigurationManager manager = ConfigurationManager.INSTANCE;
