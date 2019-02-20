@@ -1,6 +1,7 @@
 package by.gstu.airline.controller.servlet;
 
 import by.gstu.airline.config.ConfigurationManager;
+import by.gstu.airline.controller.servlet.util.PageTemplate;
 import by.gstu.airline.entity.Flight;
 import by.gstu.airline.service.Service;
 import org.apache.logging.log4j.LogManager;
@@ -56,87 +57,12 @@ public class FlightEditServlet extends HttpServlet {
             }
         }
 
+        String htmlPage = String.format(PageTemplate.getFlightEditTemplate(),
+                favicon, cssHeader, css, localeJs, js, id, crewId, flightNumber, startPoint, destinationPoint,
+                departureDate, departureTime, arrivalDate, arrivalTime, plane);
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html lang=\"en\">");
-        out.println("<head>");
-        out.println("<meta charset=\"UTF-8\">");
-        out.println("<title>FLIGHT EDIT</title>");
-        out.println("<link rel=\"shortcut icon\" href=\"" + favicon + "\" type=\"image/x-icon\">");
-        out.println("<link rel=\"stylesheet\" href=\"" + cssHeader + "\">");
-        out.println("<link rel=\"stylesheet\" href=\"" + css + "\">");
-        out.println("<script src=\"" + localeJs + "\"></script>");
-        out.println("<script src=\"" + js + "\"></script>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<div id=\"content\">");
-        out.println("<div id=\"empty\"></div>");
-        out.println("<table id=\"header\">");
-        out.println("<tr>");
-        out.println("<td id=\"space\"></td>");
-        out.println("<td id=\"mainTab\" class=\"tab\"><a href=\"../\">main</a></td>");
-        out.println("<td id=\"administratorTab\" class=\"picketTab\">administrator</td>");
-        out.println("<td id=\"locale\">");
-        out.println("<select id=\"lang\">");
-        out.println("<option value=\"default\">default</option>");
-        out.println("<option value=\"en_US\">english</option>");
-        out.println("<option value=\"ru_RU\">русский</option>");
-        out.println("</select>");
-        out.println("<td id=\"sign\">");
-        out.println("<span class=\"pseudolink\" onclick=\"signOut()\">sign out</span>");
-        out.println("</td>");
-        out.println("</tr>");
-        out.println("</table>");
-        out.println("<form id=\"formMain\">");
-        out.println("<input id=\"id\" type=\"hidden\" value=\"" + id + "\">");
-        out.println("<input id=\"crewId\" type=\"hidden\" value=\"" + crewId + "\">");
-        out.println("<label id=\"labelFlightNumber\" for=\"flightNumber\">flight number:</label><br>");
-        out.println("<input id=\"flightNumber\" type=\"text\" value=\"" + flightNumber + "\">");  // flightNumber
-        out.println("<span id=\"messageFlightNumber\" class=\"message\"></span><br>");
-        out.println("<label id=\"labelStartPoint\" for=\"startPoint\">from:</label><br>");
-        out.println("<input id=\"startPoint\" type=\"text\" maxlength=\"30ch\" value=\"" + startPoint + "\">"); // startPoint
-        out.println("<span id=\"messageStartPoint\" class=\"message\"></span><br>");
-        out.println("<label id=\"labelDestinationPoint\" for=\"destinationPoint\">to:</label><br>");
-        out.println("<input id=\"destinationPoint\" type=\"text\" maxlength=\"30ch\" value=\"" + destinationPoint + "\">"); // destinationPoint
-        out.println("<span id=\"messageDestinationPoint\" class=\"message\"></span>");
-        out.println("<table>");
-        out.println("<tr>");
-        out.println("<td>");
-        out.println("<label id=\"labelDepartureDate\" for=\"departureDate\">departure date:</label><br>");
-        out.println("<input id=\"departureDate\" type=\"date\" value=\"" + departureDate + "\">"); // departureDate
-        out.println("</td>");
-        out.println("<td>");
-        out.println("<label id=\"labelDepartureTime\" for=\"departureTime\">time:</label><br>");
-        out.println("<input id=\"departureTime\" type=\"time\" value=\"" + departureTime + "\">"); // departureTime
-        out.println("</td>");
-        out.println("<td>");
-        out.println("<br><span id=\"messageDepartureDateTime\" class=\"message\"></span>");
-        out.println("</td>");
-        out.println("</tr>");
-        out.println("<tr>");
-        out.println("<td>");
-        out.println("<label id=\"labelArrivalDate\" for=\"arrivalDate\">arrival date:</label><br>\n");
-        out.println("<input id=\"arrivalDate\" type=\"date\" value=\"" + arrivalDate + "\">"); // arrivalDate
-        out.println("</td>");
-        out.println("<td>");
-        out.println("<label id=\"labelArrivalTime\" for=\"arrivalTime\">time:</label><br>");
-        out.println("<input id=\"arrivalTime\" type=\"time\" value=\"" + arrivalTime + "\">"); // arrivalTime
-        out.println("</td>");
-        out.println("<td>");
-        out.println("<br><span id=\"messageArrivalDateTime\" class=\"message\"></span>");
-        out.println("</td>");
-        out.println("</tr>");
-        out.println("</table>");
-        out.println("<label id=\"labelPlane\" for=\"plane\">plane:</label><br>\n");
-        out.println("<input id=\"plane\" type=\"text\" maxlength=\"20ch\" value=\"" + plane + "\">"); // plane
-        out.println("<span id=\"messagePlane\" class=\"message\"></span><br>");
-        out.println("<input id=\"buttonSave\" type=\"button\" value=\"Save\" onclick=\"buttonSaveAction()\">");
-        out.println("<input id=\"buttonCancel\" type=\"button\" value=\"Cancel\" onclick=\"buttonCancelAction()\">");
-        out.println("</form>");
-        out.println("</div>");
-        out.println("</body>");
-        out.print("</html>");
+        out.print(htmlPage);
     }
 
     private String convertDate(String dateString) {

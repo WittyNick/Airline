@@ -1,4 +1,4 @@
-package by.gstu.airline.util;
+package by.gstu.airline.helper;
 
 import by.gstu.airline.config.ConfigurationManager;
 

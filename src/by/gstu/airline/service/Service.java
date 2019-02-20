@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Singleton on enum
  * The class provides CRUD methods of logic of interaction with database.
  */
 public enum Service {
