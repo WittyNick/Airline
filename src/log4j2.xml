@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
-        <RollingFile name="FileAppender" fileName="log/log.txt" filePattern="log/log_%d{yyyy-MM-dd}-%i.txt">
+        <RollingFile name="RollingFileAppender" fileName="logs/log.txt" filePattern="logs/log_%d{yyyy-MM-dd}-%i.txt">
             <LevelRangeFilter minLevel="FATAL" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY" />
             <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
             <Policies>
@@ -15,7 +15,7 @@
     </Appenders>
     <Loggers>
         <Logger name="by.gstu.airline" level="DEBUG" additivity="true">
-            <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="RollingFileAppender" />
         </Logger>
         <Root level="ALL">
             <AppenderRef ref="ConsoleAppender" />

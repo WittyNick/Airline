@@ -86,7 +86,8 @@ function buttonDeleteAction() {
 
 function fillMainTable() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "administrator", true);
+    // xhr.open("POST", "administrator", true);
+    xhr.open("POST", "welcome", true);
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             var flights = JSON.parse(this.responseText);

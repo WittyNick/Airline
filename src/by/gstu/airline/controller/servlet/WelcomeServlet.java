@@ -12,8 +12,8 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Gson gson = new Gson();
         Service service = Service.INSTANCE;
+        Gson gson = new Gson();
         String json = gson.toJson(service.readAllFlight());
         resp.setContentType("application/json; charset=UTF-8");
         resp.getWriter().write(json);

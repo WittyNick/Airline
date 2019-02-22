@@ -13,15 +13,16 @@ public class AdministratorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
         req.getRequestDispatcher("administrator.html").forward(req, resp);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Service service = Service.INSTANCE;
-        Gson gson = new Gson();
-        String json = gson.toJson(service.readAllFlight());
-        resp.setContentType("application/json; charset=UTF-8");
-        resp.getWriter().write(json);
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        Gson gson = new Gson();
+//        Service service = Service.INSTANCE;
+//        String json = gson.toJson(service.readAllFlight());
+//        resp.setContentType("application/json; charset=UTF-8");
+//        resp.getWriter().write(json);
+//    }
 }

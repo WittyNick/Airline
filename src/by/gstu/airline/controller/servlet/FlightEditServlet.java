@@ -56,7 +56,6 @@ public class FlightEditServlet extends HttpServlet {
                 crewId = "0";
             }
         }
-
         String htmlPage = String.format(PageTemplate.getFlightEditTemplate(),
                 favicon, cssHeader, css, localeJs, js, id, crewId, flightNumber, startPoint, destinationPoint,
                 departureDate, departureTime, arrivalDate, arrivalTime, plane);
@@ -72,7 +71,6 @@ public class FlightEditServlet extends HttpServlet {
     private String convertTime(String timeString) {
         return convert(timeString, "time.format", "HH:mm");
     }
-
 
     private String convert(String data, String fromPatternProperty, String toPattern) {
         ConfigurationManager manager = ConfigurationManager.INSTANCE;

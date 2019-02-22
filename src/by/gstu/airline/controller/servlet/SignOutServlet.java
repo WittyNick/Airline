@@ -14,7 +14,8 @@ public class SignOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.removeAttribute("role");
+            session.invalidate();
+//            session.removeAttribute("role");
         }
     }
 }

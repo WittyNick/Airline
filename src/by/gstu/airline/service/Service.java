@@ -42,10 +42,6 @@ public enum Service {
         employee.setId(id);
     }
 
-    public synchronized Employee readEmployeeById(int id) {
-        return employeeDao.readById(id);
-    }
-
     public synchronized List<Employee> readAllEmployee() {
         return employeeDao.readAll();
     }
@@ -62,10 +58,6 @@ public enum Service {
     public synchronized void create(Crew crew) {
         int id = crewDao.create(crew);
         crew.setId(id);
-    }
-
-    public synchronized List<Crew> readAllCrew() {
-        return crewDao.readAll();
     }
 
     public synchronized Crew readCrewById(int id) {
@@ -138,7 +130,6 @@ public enum Service {
             deleteMemberByCrewId(flight.getCrew().getId());
         }
         delete(flight.getCrew());
-
         flightDao.delete(flight);
     }
 
