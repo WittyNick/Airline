@@ -5,8 +5,8 @@ public class Flight {
     private int flightNumber;
     private String startPoint;
     private String destinationPoint;
-    private String departureDate;
-    private String departureTime;
+    private String departureDate; // yyyy-MM-dd
+    private String departureTime; // HH:mm
     private String arrivalDate;
     private String arrivalTime;
     private String plane;

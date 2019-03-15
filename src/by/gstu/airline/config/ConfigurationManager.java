@@ -1,12 +1,7 @@
 package by.gstu.airline.config;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.nio.charset.StandardCharsets;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Singleton.
@@ -14,66 +9,62 @@ import java.util.ResourceBundle;
  */
 public enum ConfigurationManager {
     INSTANCE;
-    private static final Logger log = LogManager.getLogger(ConfigurationManager.class);
     private final String localePropertyFile = "resource.locale";
     private final String sqlPropertyFile = "resource.sql";
     private final String databasePropertyFile = "resource.database";
-    private ResourceBundle localeBundle;
-    private ResourceBundle sqlBundle;
-    private ResourceBundle databaseBundle;
-
-    ConfigurationManager() {
-        localeBundle = ResourceBundle.getBundle(localePropertyFile, Locale.getDefault());
-        sqlBundle = ResourceBundle.getBundle(sqlPropertyFile);
-        databaseBundle = ResourceBundle.getBundle(databasePropertyFile);
-    }
-
-    public void changeLocale(Locale locale) {
-        localeBundle = ResourceBundle.getBundle(localePropertyFile, locale);
-    }
+    private final ResourceBundle sqlBundle = ResourceBundle.getBundle(sqlPropertyFile);
+    private final ResourceBundle databaseBundle = ResourceBundle.getBundle(databasePropertyFile);
 
     /**
-     * Read localized string by key from resource/locale.property file.
-     *
-     * @param key the key for the desired localized string
-     * @return localized string
-     */
-    public String getText(String key) {
-        if (localeBundle.containsKey(key)) {
-            return convert(localeBundle.getString(key));
-        }
-        log.error("missing property \"" + key + "\" in file: resource/locale.properties");
-        return "";
-    }
-
-    /**
-     * Read SQL query by key from resource/sql.properties file.
+     * Reads SQL query by key from resource/sql.properties file.
      *
      * @param key the key for the desired localized query
      * @return SQL query string
      */
     public String getQuery(String key) {
-        try {
-            return sqlBundle.getString(key);
-        } catch (MissingResourceException e) {
-            log.error("missing property \"" + key + "\" in file: resource/sql.properties", e);
-            throw e;
-        }
+        return sqlBundle.getString(key);
     }
 
     /**
-     * Read database connection pframeters from resources/database.properties.
+     * Reads database connection parameters from resources/database.properties.
      *
      * @param key the key for the desired property
      * @return database connection property
      */
     public String getProperty(String key) {
-        try {
-            return databaseBundle.getString(key);
-        } catch (MissingResourceException e) {
-            log.error("missing property \"" + key + "\" in file: resource/database.properties", e);
-            throw e;
+        return databaseBundle.getString(key);
+    }
+
+    /**
+     * Reads localized word from resource file and returns in as String.
+     *
+     * @param locale current user locale
+     * @param key key-word that needs to be localized
+     * @return localized word
+     */
+    public String getText(Locale locale, String key) {
+        return getTextMap(locale, key).get(key);
+    }
+
+    /**
+     * Reads localized words from resource file and returns Mat<String, String>
+     *     where key is key-word, value is localized word.
+     *
+     * @param locale locale of current user
+     * @param keys array of key-words that needs to be localized
+     * @return Map of localized words
+     */
+    public Map<String, String> getTextMap(Locale locale, String... keys) {
+        ResourceBundle localeBundle = ResourceBundle.getBundle(localePropertyFile, locale);
+        Map<String, String> map = new HashMap<>();
+        for (String key : keys) {
+            String text = "";
+            if (localeBundle.containsKey(key)) {
+                text = convert(localeBundle.getString(key));
+            }
+            map.put(key, text);
         }
+        return map;
     }
 
     private String convert(String text) {

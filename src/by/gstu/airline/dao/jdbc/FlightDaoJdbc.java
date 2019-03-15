@@ -5,6 +5,8 @@ import by.gstu.airline.entity.Crew;
 import by.gstu.airline.entity.Employee;
 import by.gstu.airline.entity.Flight;
 import by.gstu.airline.entity.Position;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,7 @@ import java.util.List;
  * The class provides CRUD methods for Flight object.
  */
 public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
+    private static final Logger log = LogManager.getLogger(FlightDaoJdbc.class);
 
     @Override
     protected String getCreateQuery() {
@@ -108,8 +111,10 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
                 flight.setDestinationPoint(resultSet.getString(manager.getQuery("flight.select.column.destinationPoint")));
                 Date departureDateTime = new Date(resultSet.getLong(manager.getQuery("flight.select.column.departureDateTime")));
                 Date arrivalDateTime = new Date(resultSet.getLong(manager.getQuery("flight.select.column.arrivalDateTime")));
+
                 flight.setDepartureDate(toDateString(departureDateTime));
                 flight.setDepartureTime(toTimeString(departureDateTime));
+
                 flight.setArrivalDate(toDateString(arrivalDateTime));
                 flight.setArrivalTime(toTimeString(arrivalDateTime));
 
@@ -152,24 +157,23 @@ public class FlightDaoJdbc extends GenericDaoJdbc<Flight> implements FlightDao {
     }
 
     private Date stringToDate(String date, String time) {
-        String pattern = manager.getText("date.format") + ' ' + manager.getText("time.format");
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date result = null;
         try {
             result = format.parse(date + ' ' + time);
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }
 
     private String toDateString(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(manager.getText("date.format"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(date);
     }
 
     private String toTimeString(Date date) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat(manager.getText("time.format"));
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         return timeFormat.format(date);
     }
 }

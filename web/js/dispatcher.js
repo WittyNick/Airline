@@ -48,7 +48,7 @@ function buttonDeleteCrewAction() {
     }
     var selectedFlightArray = tmpSelectedRow.children;
     var crewId = Number(selectedFlightArray[9].innerText);
-    if (crewId !== 0 && !confirm(responseObject["crew.confirm.delete"])) {
+    if (crewId != 0 && !confirm(responseObject["crew.confirm.delete"])) {
         return;
     }
     var flight = {

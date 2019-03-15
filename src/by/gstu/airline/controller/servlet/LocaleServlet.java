@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,47 +27,50 @@ public class LocaleServlet extends HttpServlet {
         }
         Gson gson = new Gson();
         String[] requestParameters = gson.fromJson(json, String[].class);
-
-        String locale = findLocale(req);
-        String[] localeArr = locale.split("_");
-        manager.changeLocale(new Locale(localeArr[0], localeArr[1]));
-
-        Map<String, String> map = new HashMap<>();
-        map.put("locale", locale);
-        for (String parameter : requestParameters) {
-            map.put(parameter, manager.getText(parameter));
-        }
+        Locale locale = findLocale(req);
+        Map<String, String> map = manager.getTextMap(locale, requestParameters);
+        map.put("locale", locale.toString());
         String jsonMap = gson.toJson(map);
         resp.setContentType("application/json; charset=UTF-8");
         resp.getWriter().print(jsonMap);
     }
 
-    private String findLocale(HttpServletRequest req) {
-        String locale = findSessionLocale(req);
+    private Locale findLocale(HttpServletRequest req) {
+        Locale locale = findSessionLocale(req);
         if (locale != null) {
             return locale;
-        } else {
-            locale = findCookieLocale(req);
         }
-        if (locale == null || "default".equals(locale)) {
-            locale = req.getLocale().toString();
+        locale = findCookieLocale(req);
+        if (locale == null) {
+            locale = req.getLocale();
         }
+        saveToSession(req, locale);
         return locale;
     }
 
-    private String findSessionLocale(HttpServletRequest req) {
+    private Locale findSessionLocale(HttpServletRequest req) {
         HttpSession session = req.getSession();
-        return (String) session.getAttribute("locale");
+        return (Locale) session.getAttribute("locale");
     }
 
-    private String findCookieLocale(HttpServletRequest req) {
+    private Locale findCookieLocale(HttpServletRequest req) {
         Cookie [] cookies = req.getCookies();
             for (Cookie cookie : cookies) {
                 String name = cookie.getName();
                 if ("locale".equals(name)) {
-                    return cookie.getValue();
+                    return getLocaleByName(cookie.getValue());
                 }
             }
         return null;
+    }
+
+    private Locale getLocaleByName(String localeName) {
+        String[] localeArr = localeName.split("_");
+        return new Locale(localeArr[0], localeArr[1]);
+    }
+
+    private void saveToSession(HttpServletRequest req, Locale locale) {
+        HttpSession session = req.getSession();
+        session.setAttribute("locale", locale);
     }
 }
