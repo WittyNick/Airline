@@ -11,6 +11,6 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        req.getRequestDispatcher("dispatcher.html").forward(req, resp);
+        req.getRequestDispatcher("html/dispatcher.html").forward(req, resp);
     }
 }

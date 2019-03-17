@@ -18,19 +18,19 @@ public class CrewEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String contextPath = req.getContextPath();
         int flightId = Integer.parseInt(req.getParameter("flightId"));
         int crewId = Integer.parseInt(req.getParameter("crewId"));
-        Map<String, String> parameterMap = getParameterMap(contextPath, flightId, crewId);
-        String fileName = getServletContext().getRealPath("html-template/crew-edit.html");
+        Map<String, String> parameterMap = getParameterMap(flightId, crewId);
+        String fileName = getServletContext().getRealPath("html/template/crew-edit.html");
         String htmlPage = HtmlTemplateEngine.getHtmlPage(fileName, parameterMap);
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
         out.print(htmlPage);
     }
 
-    private Map<String, String> getParameterMap(String contextPath, int flightId, int crewId) {
+    private Map<String, String> getParameterMap(int flightId, int crewId) {
         Service service = Service.INSTANCE;
+        String contextPath = getServletContext().getContextPath();
         String crewName = "";
         String employeeListHtml = "";
         List<Employee> employeeBase = service.readAllEmployee();

@@ -179,7 +179,7 @@
     <!-- Welcome page -->
 
     <welcome-file-list>
-        <welcome-file>welcome.html</welcome-file>
+        <welcome-file>html/welcome.html</welcome-file>
     </welcome-file-list>
 
     <!-- Session -->

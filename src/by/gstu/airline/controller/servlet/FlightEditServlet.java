@@ -16,18 +16,18 @@ public class FlightEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String contextPath = req.getContextPath();
         int flightId = Integer.parseInt(req.getParameter("flightId"));
-        Map<String, String> parameterMap = getPageParameters(contextPath, flightId);
-        String fileName = getServletContext().getRealPath("html-template/flight-edit.html");
+        Map<String, String> parameterMap = getPageParameters(flightId);
+        String fileName = getServletContext().getRealPath("html/template/flight-edit.html");
         String htmlPage = HtmlTemplateEngine.getHtmlPage(fileName, parameterMap);
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
         out.print(htmlPage);
     }
 
-    private Map<String, String> getPageParameters(String contextPath, int flightId) {
+    private Map<String, String> getPageParameters(int flightId) {
         Service service = Service.INSTANCE;
+        String contextPath = getServletContext().getContextPath();
         String flightNumber = "";
         String startPoint = "";
         String destinationPoint = "";
