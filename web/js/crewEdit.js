@@ -190,23 +190,19 @@ function saveAction() {
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             if ("ok" === xhr.responseText) {
-                doc.location.href = "../../dispatcher";
+                doc.location.href = "../dispatcher";
             }
         }
     };
     xhr.send(JSON.stringify(bobtailFlight));
 }
 
-function cancelAction() {
-    doc.location.href = "../../dispatcher";
-}
-
 function signOut() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../../signout", true);
+    xhr.open("POST", "../signout", true);
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            doc.location.href = "../../";
+            doc.location.href = "../";
         }
     };
     xhr.send();

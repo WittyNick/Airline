@@ -93,7 +93,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>crewEditServlet</servlet-name>
-        <url-pattern>/dispatcher/crew/edit</url-pattern>
+        <url-pattern>/dispatcher/edit</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -102,7 +102,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>crewSaveServlet</servlet-name>
-        <url-pattern>/dispatcher/crew/save</url-pattern>
+        <url-pattern>/dispatcher/save</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -120,7 +120,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>employeeAddServlet</servlet-name>
-        <url-pattern>/dispatcher/crew/employee/add</url-pattern>
+        <url-pattern>/dispatcher/employee/add</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -129,7 +129,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>employeeDeleteServlet</servlet-name>
-        <url-pattern>/dispatcher/crew/employee/delete</url-pattern>
+        <url-pattern>/dispatcher/employee/delete</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -140,7 +140,7 @@
         <servlet-name>localeServlet</servlet-name>
         <url-pattern>/locale</url-pattern>
         <url-pattern>/administrator/locale</url-pattern>
-        <url-pattern>/dispatcher/crew/locale</url-pattern>
+        <url-pattern>/dispatcher/locale</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -151,7 +151,7 @@
         <servlet-name>localeChangeServlet</servlet-name>
         <url-pattern>/locale/change</url-pattern>
         <url-pattern>/administrator/locale/change</url-pattern>
-        <url-pattern>/dispatcher/crew/locale/change</url-pattern>
+        <url-pattern>/dispatcher/locale/change</url-pattern>
     </servlet-mapping>
 
     <!-- Filters -->
@@ -163,7 +163,8 @@
     <filter-mapping>
         <filter-name>administratorFilter</filter-name>
         <url-pattern>/administrator/*</url-pattern>
-        <url-pattern>/flight/*</url-pattern>
+        <url-pattern>/html/administrator.html</url-pattern>
+        <url-pattern>/html/flight-edit.html</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -173,7 +174,8 @@
     <filter-mapping>
         <filter-name>dispatcherFilter</filter-name>
         <url-pattern>/dispatcher/*</url-pattern>
-        <url-pattern>/crew/*</url-pattern>
+        <url-pattern>/html/dispatcher.html</url-pattern>
+        <url-pattern>/html/crew-edit.html</url-pattern>
     </filter-mapping>
 
     <!-- Welcome page -->

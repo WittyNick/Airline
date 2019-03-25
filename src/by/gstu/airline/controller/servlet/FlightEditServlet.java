@@ -27,7 +27,6 @@ public class FlightEditServlet extends HttpServlet {
 
     private Map<String, String> getPageParameters(int flightId) {
         Service service = Service.INSTANCE;
-        String contextPath = getServletContext().getContextPath();
         String flightNumber = "";
         String startPoint = "";
         String destinationPoint = "";
@@ -54,7 +53,6 @@ public class FlightEditServlet extends HttpServlet {
             }
         }
         Map<String, String> map = new HashMap<>();
-        map.put("#context.path", contextPath);
         map.put("#id", "" + flightId);
         map.put("#crew.id", crewId);
         map.put("#flight.number", flightNumber);

@@ -35,7 +35,7 @@ public class HtmlTemplateEngine {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(fileName), StandardCharsets.UTF_8))) {
-            while(reader.ready()) {
+            while (reader.ready()) {
                 fileContent.append(reader.readLine());
             }
         } catch (IOException e) {

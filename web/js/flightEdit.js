@@ -50,10 +50,6 @@ function buttonSaveAction() {
     xhr.send(json);
 }
 
-function buttonCancelAction() {
-    doc.location.href = "../administrator";
-}
-
 function signOut() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "../signout", true);

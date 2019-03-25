@@ -30,7 +30,6 @@ public class CrewEditServlet extends HttpServlet {
 
     private Map<String, String> getParameterMap(int flightId, int crewId) {
         Service service = Service.INSTANCE;
-        String contextPath = getServletContext().getContextPath();
         String crewName = "";
         String employeeListHtml = "";
         List<Employee> employeeBase = service.readAllEmployee();
@@ -49,7 +48,6 @@ public class CrewEditServlet extends HttpServlet {
         }
         String employeeBaseHtml = createTbodyEmployee(employeeBase);
         Map<String, String> map = new HashMap<>();
-        map.put("#context.path", contextPath);
         map.put("#flight.id", "" + flightId);
         map.put("#crew.id", "" + crewId);
         map.put("#crew.name", crewName);
