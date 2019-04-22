@@ -55,12 +55,13 @@ public enum ConfigurationManager {
      * @return Map of localized words
      */
     public Map<String, String> getTextMap(Locale locale, String... keys) {
-        ResourceBundle localeBundle = ResourceBundle.getBundle(localePropertyFile, locale);
+        ResourceBundle localeBundle = ResourceBundle.getBundle(localePropertyFile, locale, new UTF8Control());
         Map<String, String> map = new HashMap<>();
         for (String key : keys) {
             String text = "";
             if (localeBundle.containsKey(key)) {
-                text = convert(localeBundle.getString(key));
+//                text = convert(localeBundle.getString(key));
+                text = localeBundle.getString(key);
             }
             map.put(key, text);
         }
